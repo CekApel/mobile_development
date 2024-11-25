@@ -6,6 +6,9 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -14,6 +17,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import bangkit.mobiledev.cek_apel.R
 import bangkit.mobiledev.cek_apel.databinding.FragmentScanBinding
 import bangkit.mobiledev.cek_apel.utils.getImageUri
 import bangkit.mobiledev.cek_apel.utils.reduceFileImage
@@ -54,6 +59,7 @@ class ScanFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentScanBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
 
         currentImageUri = savedInstanceState?.getParcelable(STATE_IMAGE_URI)
 
@@ -67,6 +73,21 @@ class ScanFragment : Fragment() {
         binding.btnKamera.setOnClickListener { startCamera() }
 
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_scan, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_history -> {
+                findNavController().navigate(R.id.navigation_history)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun startGallery() {
@@ -118,4 +139,5 @@ class ScanFragment : Fragment() {
         private const val STATE_IMAGE_URI = "state_image_uri"
     }
 }
+
 

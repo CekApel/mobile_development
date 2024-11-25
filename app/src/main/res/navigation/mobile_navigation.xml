@@ -28,4 +28,10 @@
         android:name="bangkit.mobiledev.cek_apel.ui.profil.ProfilFragment"
         android:label="@string/title_profil"
         tools:layout="@layout/fragment_profil" />
+
+    <fragment
+        android:id="@+id/navigation_history"
+        android:name="bangkit.mobiledev.cek_apel.ui.scan.HistoryFragment"
+        android:label="History"
+        tools:layout="@layout/fragment_history"/>
 </navigation>
