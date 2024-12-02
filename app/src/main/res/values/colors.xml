@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="red">#F9E0E4</color>
+    <color name="pink">#ffad98</color>
+    <color name="light_pink">#f8ced2</color>
+    <color name="light_pink_second">#f9e0e4</color>
+    <color name="green">#85ad67</color>
+    <color name="black">#333333</color>
+    <color name="white">#f0f1e9</color>
+
+    <color name="pinkk">#F06292</color>
+    <color name="navi">#2D3D4F</color>
+</resources>
