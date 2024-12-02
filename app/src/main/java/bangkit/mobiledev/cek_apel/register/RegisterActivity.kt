@@ -36,27 +36,33 @@ class RegisterActivity : AppCompatActivity() {
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            // Sign out the user immediately after registration
                             auth.signOut()
                             Toast.makeText(this, "Registrasi berhasil! Silakan login.", Toast.LENGTH_SHORT).show()
-
-                            // Navigate to LoginActivity
                             val intent = Intent(this, LoginActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                             startActivity(intent)
-                            finish()
+                            finish() // Finish RegisterActivity to avoid stacking.
                         } else {
-                            // Handle registration failure
                             Toast.makeText(this, "Registrasi gagal: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                         }
                     }
             }
         }
 
-        // Navigate to Login
+        // Login Link
         binding.loginLink.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
-            finish()
+            finish() // Finish RegisterActivity to avoid stacking.
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish() // Ensure no stacked activity remains.
     }
 }
