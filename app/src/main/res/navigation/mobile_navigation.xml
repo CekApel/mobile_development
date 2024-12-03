@@ -24,9 +24,9 @@
         tools:layout="@layout/fragment_article" />
 
     <fragment
-        android:id="@+id/navigation_profil"
-        android:name="bangkit.mobiledev.cek_apel.ui.profil.ProfilFragment"
-        android:label="@string/title_profil"
-        tools:layout="@layout/fragment_profil" />
+        android:id="@+id/navigation_settings"
+        android:name="bangkit.mobiledev.cek_apel.ui.settings.SettingsFragment"
+        android:label="@string/title_settings"
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>

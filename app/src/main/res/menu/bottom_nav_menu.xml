@@ -18,9 +18,9 @@
         android:title="@string/title_article" />
 
     <item
-        android:id="@+id/navigation_profil"
-        android:icon="@drawable/ic_profile"
-        android:title="@string/title_profil" />
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/baseline_settings_24"
+        android:title="@string/title_settings" />
 
 
 </menu>

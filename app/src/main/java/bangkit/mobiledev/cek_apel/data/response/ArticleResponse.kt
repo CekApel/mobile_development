@@ -13,12 +13,18 @@ data class ArticleResponse(
 
 data class DataItem(
 
+	@field:SerializedName("penanganan_penyakit")
+	val penangananPenyakit: String,
+
 	@field:SerializedName("nama")
 	val nama: String,
 
-	@field:SerializedName("deskripsi")
-	val deskripsi: String,
+	@field:SerializedName("image_url")
+	val imageUrl: String,
 
-	@field:SerializedName("penangananPenyakit")
-	val penangananPenyakit: List<String>
+	@field:SerializedName("id")
+	val id: Int,
+
+	@field:SerializedName("deskripsi")
+	val deskripsi: String
 )

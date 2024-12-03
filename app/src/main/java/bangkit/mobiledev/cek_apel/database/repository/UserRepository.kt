@@ -28,16 +28,15 @@ class UserRepository(
         val currentUser = auth.currentUser
             ?: throw IllegalStateException("No logged-in user")
 
+        val existingProfile = userProfileDao.getUserProfileSync(currentUser.email!!)
         val updatedProfile = UserProfile(
             email = currentUser.email!!,
             name = name,
-            profileImageUri = profileImageUri?.toString()
+            profileImageUri = profileImageUri?.toString() ?: existingProfile?.profileImageUri
         )
 
         userProfileDao.insertProfile(updatedProfile)
     }
-
-    fun isUserLoggedIn(): Boolean = auth.currentUser != null
 
     fun logout() {
         auth.signOut()

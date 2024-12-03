@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CekApel">
         <activity
-            android:name=".ui.profil.EditProfilActivity"
+            android:name=".ui.settings.EditProfilActivity"
             android:exported="false" />
         <activity
             android:name=".forgot_password.ForgotPasswordActivity"

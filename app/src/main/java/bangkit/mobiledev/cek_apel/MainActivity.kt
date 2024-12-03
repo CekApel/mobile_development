@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_scan, R.id.navigation_article, R.id.navigation_profil
+                R.id.navigation_home, R.id.navigation_scan, R.id.navigation_article, R.id.navigation_settings
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

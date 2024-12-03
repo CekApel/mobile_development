@@ -1,49 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="12dp"
     app:cardElevation="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded"
         android:padding="16dp">
 
-<!--        <ImageView-->
-<!--            android:id="@+id/article_image"-->
-<!--            android:layout_width="150dp"-->
-<!--            android:layout_height="100dp"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_centerVertical="true" />-->
+        <ImageView
+            android:id="@+id/ivArticle"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/avatars"/>
 
-        <TextView
-            android:id="@+id/article_title"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/ivArticle"
             android:layout_marginStart="16dp"
-            android:text="Judul Artikel"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:textColor="@android:color/black"
-            android:layout_alignParentTop="true"
-            android:maxLines="2"
-            android:ellipsize="end"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/article_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Deskripsi artikel singkat"
-            android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="@android:color/darker_gray"
-            android:layout_below="@id/article_title"
-            android:maxLines="3"
-            android:ellipsize="end"/>
+            <TextView
+                android:id="@+id/tvArticleTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:maxLines="2"
+                android:ellipsize="end"
+                tools:text="Judul Artikel"/>
+
+            <TextView
+                android:id="@+id/tvArticleDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray"
+                android:maxLines="3"
+                android:ellipsize="end"
+                tools:text="Deskripsi artikel singkat"/>
+
+        </LinearLayout>
 
     </RelativeLayout>
 

@@ -2,6 +2,7 @@ package bangkit.mobiledev.cek_apel.ui.article
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import bangkit.mobiledev.cek_apel.databinding.ActivityDetailArticleBinding
 
 class DetailArticleActivity : AppCompatActivity() {
@@ -16,13 +17,26 @@ class DetailArticleActivity : AppCompatActivity() {
 
         val articleName = intent.getStringExtra("ARTICLE_NAME") ?: ""
         val articleDescription = intent.getStringExtra("ARTICLE_DESCRIPTION") ?: ""
-        val articleHandling = intent.getStringArrayListExtra("ARTICLE_HANDLING") ?: arrayListOf()
+        val articleHandling = intent.getStringArrayListExtra("ARTICLE_HANDLING") ?: arrayListOf("Tidak ada informasi penanganan")
+        val articleImageUrl = intent.getStringExtra("ARTICLE_IMAGE_URL") ?: ""
 
-        binding.tvArticleTitle.text = articleName
-        binding.tvArticleDescription.text = articleDescription
+        binding.apply {
+            tvArticleTitle.text = articleName
+            tvArticleDescription.text = articleDescription
 
-        // You might want to set up a RecyclerView or TextView to display handling steps
-        val handlingStepsText = articleHandling.joinToString("\n") { it }
-        binding.tvHandlingSteps.text = handlingStepsText
+            // Load image using Glide
+            Glide.with(this@DetailArticleActivity)
+                .load(articleImageUrl)
+                .into(ivArticle)
+
+            // Display handling steps
+            val handlingStepsText = articleHandling?.mapIndexed { index, step ->
+                "${index + 1}. $step"
+            }?.joinToString("\n") ?: "Tidak ada informasi penanganan"
+            tvHandlingSteps.text = handlingStepsText
+        }
+
+        // Optional: Add back button functionality
+//        binding.btnBack.setOnClickListener { finish() }
     }
 }

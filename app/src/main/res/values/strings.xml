@@ -3,7 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_scan">Scan</string>
     <string name="title_article">Article</string>
-    <string name="title_profil">Profil</string>
+    <string name="title_settings">Settings</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="image_classifier_failed">Image classifier failed to initialize. See error logs for details</string>
@@ -21,6 +21,9 @@
     <string name="check_now">Cek Apel Sekarang</string>
 
     <string name="no_results_found">Ga ada hasil</string>
+
+    <string name="email_invalid">Invalid email format</string>
+    <string name="password_short">Password cannot be less than 6 characters</string>
 
     <string name="your_web_client_id">488538856877-2vos3r4eanhnoitmjs26rs6cusnvsgqm.apps.googleusercontent.com</string>
 </resources>

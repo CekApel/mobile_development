@@ -1,61 +1,57 @@
 package bangkit.mobiledev.cek_apel.adapter
 
-import android.annotation.SuppressLint
-import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import bangkit.mobiledev.cek_apel.data.response.DataItem
 import bangkit.mobiledev.cek_apel.databinding.ItemArticleBinding
-import bangkit.mobiledev.cek_apel.ui.article.DetailArticleActivity
 
-class ArticleAdapter : ListAdapter<DataItem, ArticleAdapter.ArticleViewHolder>(DIFF_CALLBACK) {
+class ArticleAdapter(private val onItemClick: (DataItem) -> Unit) :
+    ListAdapter<DataItem, ArticleAdapter.ArticleViewHolder>(ArticleDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        val binding = ItemArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ArticleViewHolder(binding)
+        val binding = ItemArticleBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return ArticleViewHolder(binding, onItemClick)
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
-        val article = getItem(position)
-        holder.bind(article)
+        holder.bind(getItem(position))
     }
 
-    class ArticleViewHolder(private val binding: ItemArticleBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ArticleViewHolder(
+        private val binding: ItemArticleBinding,
+        private val onItemClick: (DataItem) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(article: DataItem) {
-            binding.articleTitle.text = article.nama
-            binding.articleDescription.text = article.deskripsi
+            Log.d("ArticleAdapter", "Binding article: $article")
+            binding.apply {
+                tvArticleTitle.text = article.nama
+                tvArticleDescription.text = article.deskripsi
 
-            itemView.setOnClickListener {
-                val context = itemView.context
-                val intent = Intent(context, DetailArticleActivity::class.java).apply {
-                    putExtra("ARTICLE_NAME", article.nama)
-                    putExtra("ARTICLE_DESCRIPTION", article.deskripsi)
-                    putStringArrayListExtra("ARTICLE_HANDLING", ArrayList(article.penangananPenyakit))
-                }
-                context.startActivity(intent)
+                Glide.with(itemView.context)
+                    .load(article.imageUrl)
+                    .into(ivArticle)
+
+                root.setOnClickListener { onItemClick(article) }
             }
         }
     }
 
-    companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataItem>() {
-            override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
-                // Since there's no unique ID, compare all properties
-                return oldItem.nama == newItem.nama &&
-                        oldItem.deskripsi == newItem.deskripsi &&
-                        oldItem.penangananPenyakit == newItem.penangananPenyakit
-            }
+    class ArticleDiffCallback : DiffUtil.ItemCallback<DataItem>() {
+        override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+            return oldItem.id == newItem.id
+        }
 
-            @SuppressLint("DiffUtilEquals")
-            override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
-                // In this case, areItemsTheSame and areContentsTheSame are the same
-                return oldItem.nama == newItem.nama &&
-                        oldItem.deskripsi == newItem.deskripsi &&
-                        oldItem.penangananPenyakit == newItem.penangananPenyakit
-            }
+        override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+            return oldItem == newItem
         }
     }
 }

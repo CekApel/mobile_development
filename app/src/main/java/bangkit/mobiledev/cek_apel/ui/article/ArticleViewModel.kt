@@ -1,5 +1,6 @@
 package bangkit.mobiledev.cek_apel.ui.article
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,15 +27,22 @@ class ArticleViewModel : ViewModel() {
                 val response = apiService.getArticles()
 
                 if (response.isSuccessful) {
-                    _articles.value = response.body()?.data ?: emptyList()
+                    val data = response.body()?.data ?: emptyList()
+                    Log.d("ArticleViewModel", "Fetched articles: $data")
+                    _articles.value = data
                 } else {
-                    _error.value = "Failed to load articles"
+                    val errorMessage = "Failed to load articles: ${response.message()}"
+                    Log.e("ArticleViewModel", errorMessage)
+                    _error.value = errorMessage
                 }
             } catch (e: Exception) {
-                _error.value = e.message ?: "Unknown error"
+                val errorMessage = "Error fetching articles: ${e.message}"
+                Log.e("ArticleViewModel", errorMessage, e)
+                _error.value = errorMessage
             } finally {
                 _isLoading.value = false
             }
         }
     }
+
 }

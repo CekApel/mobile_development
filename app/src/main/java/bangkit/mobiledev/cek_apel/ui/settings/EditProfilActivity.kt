@@ -1,4 +1,4 @@
-package bangkit.mobiledev.cek_apel.ui.profil
+package bangkit.mobiledev.cek_apel.ui.settings
 
 import android.app.Activity
 import android.content.Intent
@@ -6,20 +6,15 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
-import bangkit.mobiledev.cek_apel.R
 import bangkit.mobiledev.cek_apel.databinding.ActivityEditProfilBinding
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
 
 class EditProfilActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditProfilBinding
-    private lateinit var profilViewModel: ProfilViewModel
+    private lateinit var settingsViewModel: SettingsViewModel
     private var selectedImageUri: Uri? = null
 
     private val pickImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -36,14 +31,12 @@ class EditProfilActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         binding = ActivityEditProfilBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        profilViewModel = ViewModelProvider(this)[ProfilViewModel::class.java]
-        val currentUser = FirebaseAuth.getInstance().currentUser
+        settingsViewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
 
-        // Pulihkan selectedImageUri jika ada
+        // Restore image URI if available
         if (savedInstanceState != null) {
             val uriString = savedInstanceState.getString("selectedImageUri")
             uriString?.let {
@@ -56,10 +49,10 @@ class EditProfilActivity : AppCompatActivity() {
         }
 
         // Observe current profile
-        profilViewModel.userProfile.observe(this) { profile ->
+        settingsViewModel.userProfile.observe(this) { profile ->
             profile?.let {
                 binding.editName.setText(it.name)
-                if (selectedImageUri == null) {  // Tampilkan gambar profil asli jika belum ada gambar baru
+                if (selectedImageUri == null) {
                     it.profileImageUri?.let { uri ->
                         Glide.with(this)
                             .load(Uri.parse(uri))
@@ -99,9 +92,11 @@ class EditProfilActivity : AppCompatActivity() {
             return
         }
 
-        profilViewModel.updateProfile(
+        val profileImageUri = selectedImageUri?.toString() ?: settingsViewModel.userProfile.value?.profileImageUri
+
+        settingsViewModel.updateProfile(
             name = name,
-            profileImageUri = selectedImageUri?.toString()
+            profileImageUri = profileImageUri
         )
 
         Toast.makeText(this, "Profile updated successfully", Toast.LENGTH_SHORT).show()
