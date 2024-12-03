@@ -44,6 +44,35 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:488538856877:android:fe67e5259cce7902ea1524",
+        "android_client_info": {
+          "package_name": "bangkit.mobiledev.nyoba_api_auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488538856877-2vos3r4eanhnoitmjs26rs6cusnvsgqm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSaCgIJTV6U0MHF7i99R87OZvCyIOk1TA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488538856877-2vos3r4eanhnoitmjs26rs6cusnvsgqm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:488538856877:android:4d132959b095ceeeea1524",
         "android_client_info": {
           "package_name": "com.dicoding.myfirebasechat"

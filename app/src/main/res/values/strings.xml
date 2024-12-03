@@ -24,6 +24,10 @@
 
     <string name="email_invalid">Invalid email format</string>
     <string name="password_short">Password cannot be less than 6 characters</string>
+    <string name="img_cant_found">Image not found</string>
+    <string name="camera_permission">Camera permission is required to proceed</string>
+    <string name="uri_photo_fail">Failed to get the photo URI</string>
+    <string name="img_empty">Please insert the image file first</string>
 
     <string name="your_web_client_id">488538856877-2vos3r4eanhnoitmjs26rs6cusnvsgqm.apps.googleusercontent.com</string>
 </resources>

@@ -31,8 +31,8 @@ class DetailArticleActivity : AppCompatActivity() {
 
             // Display handling steps
             val handlingStepsText = articleHandling?.mapIndexed { index, step ->
-                "${index + 1}. $step"
-            }?.joinToString("\n") ?: "Tidak ada informasi penanganan"
+                "$step"
+            }?.joinToString("") ?: "Tidak ada informasi penanganan"
             tvHandlingSteps.text = handlingStepsText
         }
 

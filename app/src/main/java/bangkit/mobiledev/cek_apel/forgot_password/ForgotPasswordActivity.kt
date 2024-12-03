@@ -45,5 +45,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 Toast.makeText(this, "Harap masukkan email Anda.", Toast.LENGTH_SHORT).show()
             }
         }
+
+        supportActionBar?.hide()
     }
 }

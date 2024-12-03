@@ -56,6 +56,8 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(intent)
             finish() // Finish RegisterActivity to avoid stacking.
         }
+
+        supportActionBar?.hide()
     }
 
     override fun onBackPressed() {

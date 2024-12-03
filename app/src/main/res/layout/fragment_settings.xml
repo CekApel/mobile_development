@@ -2,11 +2,14 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp"> <!-- Tambahkan padding untuk ruang ekstra -->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,7 +24,7 @@
                 android:layout_height="200dp"
                 android:src="@drawable/ic_launcher_foreground"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp" />
 
             <TextView
                 android:id="@+id/user_name"
@@ -30,7 +33,7 @@
                 android:text="Your Name"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp" />
 
             <TextView
                 android:id="@+id/user_email"
@@ -38,22 +41,23 @@
                 android:layout_height="wrap_content"
                 android:text="user@example.com"
                 android:textSize="16sp"
-                android:layout_marginBottom="24dp"/>
+                android:layout_marginBottom="24dp" />
 
             <Button
                 android:id="@+id/edit_profile_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Edit Profile"
-                android:layout_marginBottom="16dp"/>
+                android:background="@drawable/rounded"
+                android:layout_marginBottom="16dp" />
 
             <Button
                 android:id="@+id/logout_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/red"
-                android:text="Logout"/>
-
+                android:background="@drawable/rounded_red"
+                android:text="Logout"
+                android:layout_marginBottom="32dp" /> <!-- Tambahkan margin ekstra untuk tombol logout -->
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

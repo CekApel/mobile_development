@@ -1,7 +1,6 @@
 package bangkit.mobiledev.cek_apel.ui.scan
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -35,29 +34,32 @@ class ScanFragment : Fragment() {
     ) { uri: Uri? ->
         if (uri != null) {
             currentImageUri = uri
-            processAndShowImage(uri)
+            showImage()
+        } else {
+            Toast.makeText(requireContext(), getString(R.string.img_cant_found), Toast.LENGTH_SHORT).show()
         }
     }
 
     private val launcherIntentCamera = registerForActivityResult(
         ActivityResultContracts.TakePicture()
     ) { isSuccess ->
-        if (isSuccess) {
-            currentImageUri?.let { processAndShowImage(it) }
+        if (isSuccess && currentImageUri != null) {
+            showImage()
+        } else {
+            Toast.makeText(requireContext(), getString(R.string.img_cant_found), Toast.LENGTH_SHORT).show()
+            currentImageUri = null
         }
     }
 
-    private val requestPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
-            if (!isGranted) {
-                Toast.makeText(requireContext(), "Camera permission required", Toast.LENGTH_LONG).show()
-            }
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (!isGranted) {
+            Toast.makeText(requireContext(), getString(R.string.camera_permission), Toast.LENGTH_LONG).show()
         }
+    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentScanBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
 
@@ -83,38 +85,40 @@ class ScanFragment : Fragment() {
     private fun startCamera() {
         currentImageUri = getImageUri(requireContext())
         if (currentImageUri == null) {
-            Toast.makeText(requireContext(), "Failed to get photo URI", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.uri_photo_fail), Toast.LENGTH_SHORT).show()
             return
         }
         launcherIntentCamera.launch(currentImageUri!!)
-    }
-
-    private fun processAndShowImage(uri: Uri) {
-        val imageFile = uriToFile(uri, requireContext())
-        val reducedFile = imageFile.reduceFileImage()
-        binding.placeholderImage.setImageURI(Uri.fromFile(reducedFile))
     }
 
     private fun showImage() {
         currentImageUri?.let {
             binding.placeholderImage.setImageURI(it)
         } ?: run {
-            Toast.makeText(requireContext(), "Image not found", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.img_cant_found), Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun analyzeImage() {
-        currentImageUri?.let { moveToResult(it) }
-            ?: Toast.makeText(requireContext(), "Please select an image", Toast.LENGTH_SHORT).show()
+        currentImageUri?.let { uri ->
+            val imageFile = uriToFile(uri, requireContext())
+            if (imageFile.exists()) {
+                moveToResult(uri)
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.img_empty), Toast.LENGTH_SHORT).show()
+            }
+        } ?: run {
+            Toast.makeText(requireContext(), getString(R.string.img_empty), Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun moveToResult(uri: Uri) {
-        val intent = Intent(requireContext(), HasilScanActivity::class.java)
-        intent.putExtra(HasilScanActivity.KEY_IMG_URI, uri.toString())
+        val intent = Intent(requireContext(), HasilScanActivity::class.java).apply {
+            putExtra(HasilScanActivity.KEY_IMG_URI, uri.toString())
+        }
         startActivity(intent)
     }
 
-    @SuppressLint("StringFormatInvalid")
     private fun checkAndRequestPermission() {
         if (!allPermissionsGranted()) {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
@@ -154,5 +158,3 @@ class ScanFragment : Fragment() {
         private const val STATE_IMAGE_URI = "state_image_uri"
     }
 }
-
-

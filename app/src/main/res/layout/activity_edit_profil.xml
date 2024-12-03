@@ -15,6 +15,7 @@
             android:gravity="center_horizontal"
             android:padding="16dp">
 
+            <!-- Profile Image -->
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/edit_profile_image"
                 android:layout_width="200dp"
@@ -23,27 +24,58 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="16dp"/>
 
+            <!-- Change Photo Button -->
             <Button
                 android:id="@+id/change_photo_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Change Photo"
-                android:layout_marginBottom="16dp"/>
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/pinkk"/>
 
-            <EditText
-                android:id="@+id/edit_name"
+            <!-- Name Label -->
+            <TextView
+                android:id="@+id/tv_nama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="1dp"
+                android:layout_gravity="start" />
+
+            <!-- Name Input with TextInputLayout -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/namaInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginBottom="16dp"
-                android:inputType="textPersonName"/>
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="1dp">
 
+                <EditText
+                    android:id="@+id/edit_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:inputType="textPersonName"
+                    android:padding="12dp"
+                    android:background="@drawable/rounded" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Save Profile Button -->
             <Button
                 android:id="@+id/save_profile_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Save Profile"/>
-
+                android:background="@drawable/rounded"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="Save Profile"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/green"/>
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

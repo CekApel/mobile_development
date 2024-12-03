@@ -74,6 +74,8 @@ dependencies {
     // Firebase Authentication
     implementation (libs.firebase.auth.ktx)
 
+    implementation (libs.play.services.auth.v2120)
+
     // Credential Manager
     implementation (libs.androidx.credentials)
     implementation (libs.androidx.credentials.play.services.auth)

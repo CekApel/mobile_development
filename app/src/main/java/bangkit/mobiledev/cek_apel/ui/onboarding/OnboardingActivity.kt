@@ -35,6 +35,8 @@ class OnboardingActivity : AppCompatActivity() {
                 finish()
             }
         }
+
+        supportActionBar?.hide()
     }
 
     private fun navigateToMainActivity() {
