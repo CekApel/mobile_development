@@ -1,5 +1,6 @@
 package bangkit.mobiledev.cek_apel
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import bangkit.mobiledev.cek_apel.R
 import bangkit.mobiledev.cek_apel.databinding.ActivityMainBinding
+import bangkit.mobiledev.cek_apel.login.LoginActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +20,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser == null) {
+            // Jika belum login, arahkan ke LoginActivity
+            val loginIntent = Intent(this, LoginActivity::class.java)
+            loginIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(loginIntent)
+            finish()
+            return
+        }
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -55,6 +69,4 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
-
 }

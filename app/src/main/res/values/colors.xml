@@ -51,11 +51,14 @@
     <color name="icon_color">#757575</color>
 
     <color name="track_color">#CCCCCC</color>
-    <color name="thumb_color">#FF5722</color>
 
 
     <color name="primary_text_color">#333333</color>
     <color name="secondary_text_color">#666666</color>
     <color name="image_placeholder_background">#E0E0E0</color>
     <color name="date_text_color">#888888</color>
+
+    <color name="switch_track_inactive">#B0BEC5</color>
+    <color name="thumb_tint_active">#A3C583</color>
+    <color name="thumb_tint_inactive">#888888</color>
 </resources>
