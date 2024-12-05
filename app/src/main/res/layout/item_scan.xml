@@ -1,53 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="12dp"
     app:cardElevation="4dp"
+    app:cardBackgroundColor="#FFFFFF"
     tools:context=".ui.scan.ScanFragment">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded"
+        android:orientation="vertical"
         android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/image"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/RoundedImageView"
+                android:background="@color/image_placeholder_background"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="16dp">
+
+                <TextView
+                    android:id="@+id/textTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hasil Scan"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/primary_text_color"
+                    android:maxLines="2"
+                    android:ellipsize="end"/>
+
+                <TextView
+                    android:id="@+id/textDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Penjelasan Scan"
+                    android:textSize="14sp"
+                    android:textColor="@color/secondary_text_color"
+                    android:maxLines="3"
+                    android:ellipsize="end"/>
+
+                <TextView
+                    android:id="@+id/textScanDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/poppinsr"
+                    android:text="12 Desember 2023"
+                    android:textSize="12sp"
+                    android:textColor="@color/date_text_color"
+                    android:drawableStart="@drawable/calendar"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"/>
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/buttonDelete"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/delete"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Hapus Riwayat Scan"
+                android:padding="8dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"
+            android:layout_marginTop="16dp"/>
 
         <TextView
-            android:id="@+id/textTitle"
-            android:layout_width="wrap_content"
+            android:id="@+id/buttonDetailHistory"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/image"
-            android:layout_marginStart="16dp"
-            android:text="Hasil Scan"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:textColor="@android:color/black"
-            android:layout_alignParentTop="true"
-            android:maxLines="2"
-            android:ellipsize="end"/>
+            android:fontFamily="@font/poppinsb"
+            android:text="Lihat Detail"
+            android:textColor="@color/green"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"
+            android:background="?attr/selectableItemBackground"/>
 
-        <TextView
-            android:id="@+id/textDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/image"
-            android:layout_marginStart="16dp"
-            android:text="Penjelasan Scan"
-            android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="@android:color/darker_gray"
-            android:layout_below="@id/textTitle"
-            android:maxLines="3"
-            android:ellipsize="end"/>
-
-    </RelativeLayout>
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

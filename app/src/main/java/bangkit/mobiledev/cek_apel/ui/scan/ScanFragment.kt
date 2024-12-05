@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -61,7 +62,8 @@ class ScanFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentScanBinding.inflate(inflater, container, false)
-        setHasOptionsMenu(true)
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+//        setHasOptionsMenu(true)
 
         currentImageUri = savedInstanceState?.getParcelable(STATE_IMAGE_URI)
 
@@ -133,25 +135,25 @@ class ScanFragment : Fragment() {
         outState.putParcelable(STATE_IMAGE_URI, currentImageUri)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_scan, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_history -> {
-                navigateToHistory()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun navigateToHistory() {
-        val intent = Intent(requireContext(), HistoryScanActivity::class.java)
-        startActivity(intent)
-    }
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        super.onCreateOptionsMenu(menu, inflater)
+//        inflater.inflate(R.menu.menu_scan, menu)
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return when (item.itemId) {
+//            R.id.action_history -> {
+//                navigateToHistory()
+//                true
+//            }
+//            else -> super.onOptionsItemSelected(item)
+//        }
+//    }
+//
+//    private fun navigateToHistory() {
+//        val intent = Intent(requireContext(), HistoryScanActivity::class.java)
+//        startActivity(intent)
+//    }
 
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA

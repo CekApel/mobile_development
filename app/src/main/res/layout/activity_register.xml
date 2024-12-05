@@ -28,6 +28,7 @@
             android:id="@+id/appTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/orbitron"
             android:text="Register"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -39,6 +40,7 @@
             android:id="@+id/tv_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsr"
             android:text="Email"
             android:textSize="16sp"
             android:textColor="@color/black"
@@ -68,6 +70,7 @@
             android:id="@+id/tv_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsr"
             android:text="Password"
             android:textSize="16sp"
             android:textColor="@color/black"
@@ -97,6 +100,7 @@
             android:id="@+id/tv_passwordConfirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsr"
             android:text="Confirm Password"
             android:textSize="16sp"
             android:textColor="@color/black"
@@ -129,6 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:textSize="16sp"
+            android:fontFamily="@font/poppinsb"
             android:text="Register"
             android:background="@drawable/rounded"
             android:layout_marginBottom="16dp"
@@ -146,6 +151,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppinsr"
                 android:text="Apakah kamu sudah punya akun? "
                 android:textColor="#000" />
 
@@ -153,6 +159,7 @@
                 android:id="@+id/loginLink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppinsb"
                 android:text="Login"
                 android:textColor="#4CAF50"
                 android:textStyle="bold" />

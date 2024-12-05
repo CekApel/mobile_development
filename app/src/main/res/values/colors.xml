@@ -11,4 +11,51 @@
     <color name="pinkk">#F06292</color>
     <color name="navi">#2D3D4F</color>
     <color name="red">#D32F2F</color>
+
+
+
+
+
+
+
+
+
+    <!-- CONTOH WARNA LAIN -->
+    <!-- Primary Color Palette -->
+    <color name="primary_color">#3F51B5</color>
+    <color name="primary_variant">#303F9F</color>
+    <color name="primary_light">#C5CAE9</color>
+
+    <!-- Secondary Color Palette -->
+    <color name="secondary_color">#FF4081</color>
+    <color name="secondary_variant">#F50057</color>
+    <color name="secondary_light">#FF80AB</color>
+
+    <!-- Background Colors -->
+    <color name="background_primary">#FFFFFF</color>
+    <color name="background_secondary">#F5F5F5</color>
+    <color name="background_tertiary">#E0E0E0</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_hint">#BDBDBD</color>
+
+    <!-- Accent and State Colors -->
+    <color name="error_color">#D32F2F</color>
+    <color name="success_color">#388E3C</color>
+    <color name="warning_color">#FFA000</color>
+
+    <!-- Additional Utility Colors -->
+    <color name="divider_color">#BDBDBD</color>
+    <color name="icon_color">#757575</color>
+
+    <color name="track_color">#CCCCCC</color>
+    <color name="thumb_color">#FF5722</color>
+
+
+    <color name="primary_text_color">#333333</color>
+    <color name="secondary_text_color">#666666</color>
+    <color name="image_placeholder_background">#E0E0E0</color>
+    <color name="date_text_color">#888888</color>
 </resources>
