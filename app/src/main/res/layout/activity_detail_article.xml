@@ -11,17 +11,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Article Detail"
+            android:background="?android:attr/colorBackground"
+            app:navigationIcon="@drawable/arrow_back"
+            app:navigationContentDescription="Back"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivArticle"
             android:layout_width="0dp"
             android:layout_height="250dp"
             android:scaleType="centerCrop"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/topAppBar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"/>
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.RoundedImageView"
+            tools:src="@tools:sample/backgrounds/scenic"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvArticleTitle"
@@ -35,6 +50,7 @@
             app:layout_constraintTop_toBottomOf="@id/ivArticle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/green"
             tools:text="Article Title Goes Here"/>
 
         <com.google.android.material.textview.MaterialTextView
@@ -48,6 +64,8 @@
             android:textColor="?android:attr/textColorSecondary"
             android:justificationMode="inter_word"
             android:lineSpacingExtra="4dp"
+            android:textIsSelectable="true"
+            android:focusable="true"
             app:layout_constraintTop_toBottomOf="@id/tvArticleTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,10 +83,26 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:justificationMode="inter_word"
             android:lineSpacingExtra="4dp"
+            android:textIsSelectable="true"
+            android:focusable="true"
             app:layout_constraintTop_toBottomOf="@id/tvArticleDescription"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:text="Deskripsi Lanjutan"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnShare"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Share"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/green"
+            android:background="@drawable/rounded_top"
+            app:layout_constraintTop_toBottomOf="@id/tvHandlingSteps"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

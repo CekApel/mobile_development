@@ -51,17 +51,6 @@
                     android:ellipsize="end"/>
 
                 <TextView
-                    android:id="@+id/textDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Penjelasan Scan"
-                    android:textSize="14sp"
-                    android:textColor="@color/secondary_text_color"
-                    android:maxLines="3"
-                    android:ellipsize="end"/>
-
-                <TextView
                     android:id="@+id/textScanDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

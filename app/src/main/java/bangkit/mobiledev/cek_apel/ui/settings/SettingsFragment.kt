@@ -83,6 +83,11 @@ class SettingsFragment : Fragment() {
         binding.languageChevron.setOnClickListener {
             startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
         }
+
+        binding.aboutChevron.setOnClickListener {
+            val intent = Intent(requireContext(), AboutActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private val notificationPermissionLauncher = registerForActivityResult(

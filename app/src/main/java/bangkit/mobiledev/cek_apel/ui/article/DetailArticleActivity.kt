@@ -1,5 +1,6 @@
 package bangkit.mobiledev.cek_apel.ui.article
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -15,6 +16,11 @@ class DetailArticleActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        val toolbar = binding.topAppBar
+        toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+
         val articleName = intent.getStringExtra("ARTICLE_NAME") ?: ""
         val articleDescription = intent.getStringExtra("ARTICLE_DESCRIPTION") ?: ""
         val articleHandling = intent.getStringArrayListExtra("ARTICLE_HANDLING") ?: arrayListOf("Tidak ada informasi penanganan")
@@ -23,20 +29,38 @@ class DetailArticleActivity : AppCompatActivity() {
         binding.apply {
             tvArticleTitle.text = articleName
             tvArticleDescription.text = articleDescription
-
-            // Load image using Glide
             Glide.with(this@DetailArticleActivity)
                 .load(articleImageUrl)
                 .into(ivArticle)
 
-            // Display handling steps
-            val handlingStepsText = articleHandling?.mapIndexed { index, step ->
-                "$step"
-            }?.joinToString("") ?: "Tidak ada informasi penanganan"
+            val handlingStepsText = articleHandling?.mapIndexed { index, step -> "${index + 1}. $step" }?.joinToString("\n") ?: "Tidak ada informasi penanganan"
             tvHandlingSteps.text = handlingStepsText
         }
 
-        // Optional: Add back button functionality
-//        binding.btnBack.setOnClickListener { finish() }
+        // Setup Share button click listener
+        binding.btnShare.setOnClickListener {
+            shareArticle(articleName, articleDescription, articleHandling)
+        }
+    }
+
+    private fun shareArticle(articleName: String, articleDescription: String, articleHandling: ArrayList<String>) {
+        // Format the share text to include handling steps with automatic numbering
+        val handlingText = articleHandling.mapIndexed { index, step -> "${index + 1}. $step" }.joinToString("\n")
+        val shareText = """
+             $articleName
+             
+             $articleDescription
+             
+            Handling Steps:
+            $handlingText
+        """.trimIndent()
+
+        val shareIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, shareText)
+            type = "text/plain"
+        }
+
+        startActivity(Intent.createChooser(shareIntent, "Share article via"))
     }
 }
