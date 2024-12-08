@@ -47,8 +47,10 @@ class ScanFragment : Fragment() {
         if (isSuccess && currentImageUri != null) {
             showImage()
         } else {
-            Toast.makeText(requireContext(), getString(R.string.img_cant_found), Toast.LENGTH_SHORT).show()
+            // Reset currentImageUri jika kamera dibatalkan
+            binding.placeholderImage.setImageResource(R.drawable.ic_launcher_foreground)
             currentImageUri = null
+            Toast.makeText(requireContext(), getString(R.string.img_cant_found), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -85,6 +87,7 @@ class ScanFragment : Fragment() {
     }
 
     private fun startCamera() {
+        // Pastikan selalu membuat URI baru untuk foto
         currentImageUri = getImageUri(requireContext())
         if (currentImageUri == null) {
             Toast.makeText(requireContext(), getString(R.string.uri_photo_fail), Toast.LENGTH_SHORT).show()
@@ -107,6 +110,9 @@ class ScanFragment : Fragment() {
             if (imageFile.exists()) {
                 moveToResult(uri)
             } else {
+                // Reset gambar dan URI jika file tidak ada
+                binding.placeholderImage.setImageResource(R.drawable.ic_launcher_foreground)
+                currentImageUri = null
                 Toast.makeText(requireContext(), getString(R.string.img_empty), Toast.LENGTH_SHORT).show()
             }
         } ?: run {

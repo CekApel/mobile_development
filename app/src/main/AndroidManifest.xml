@@ -49,7 +49,9 @@
             android:exported="false" />
         <activity
             android:name=".login.LoginActivity"
-            android:exported="false" /> <!-- File Provider -->
+            android:exported="false" />
+
+        <!-- File Provider -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"

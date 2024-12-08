@@ -20,29 +20,5 @@ class AboutActivity : AppCompatActivity() {
         binding.topAppBar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
-
-        // Setup FAQ interactions
-        setupFAQInteractions()
-    }
-
-    private fun setupFAQInteractions() {
-        // FAQ 1 interaction
-        binding.faqQuestion1.setOnClickListener {
-            toggleFAQAnswer(binding.faqAnswer1)
-        }
-
-        // FAQ 2 interaction
-        binding.faqQuestion2.setOnClickListener {
-            toggleFAQAnswer(binding.faqAnswer2)
-        }
-    }
-
-    private fun toggleFAQAnswer(answerView: android.widget.TextView) {
-        // Toggle visibility of the answer
-        answerView.visibility = if (answerView.visibility == android.view.View.VISIBLE) {
-            android.view.View.GONE
-        } else {
-            android.view.View.VISIBLE
-        }
     }
 }
