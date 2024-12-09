@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/orbitron"
-            android:text="Register"
+            android:text="@string/register"
             android:textSize="30sp"
             android:textStyle="bold"
             android:layout_marginBottom="10dp"
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppinsr"
-            android:text="Email"
+            android:text="@string/email"
             android:textSize="16sp"
             android:textColor="@color/black"
             android:layout_marginBottom="1dp"
@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppinsr"
-            android:text="Password"
+            android:text="@string/password"
             android:textSize="16sp"
             android:textColor="@color/black"
             android:layout_marginBottom="1dp"
@@ -101,7 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppinsr"
-            android:text="Confirm Password"
+            android:text="@string/confirm_password"
             android:textSize="16sp"
             android:textColor="@color/black"
             android:layout_marginBottom="1dp"
@@ -134,7 +134,7 @@
             android:layout_height="50dp"
             android:textSize="16sp"
             android:fontFamily="@font/poppinsb"
-            android:text="Register"
+            android:text="@string/register"
             android:background="@drawable/rounded"
             android:layout_marginBottom="16dp"
             android:textColor="#FFF"
@@ -152,7 +152,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppinsr"
-                android:text="Apakah kamu sudah punya akun? "
+                android:text="@string/account_confirmation_login"
                 android:textColor="#000" />
 
             <TextView
@@ -160,8 +160,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppinsb"
-                android:text="Login"
+                android:text="@string/login"
                 android:textColor="#4CAF50"
+                android:layout_marginStart="3dp"
                 android:textStyle="bold" />
         </LinearLayout>
 

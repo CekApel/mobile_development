@@ -44,7 +44,7 @@
                 android:layout_marginBottom="24dp"
                 android:textStyle="bold"
                 android:fontFamily="@font/poppinsb"
-                android:text="Change Photo"
+                android:text="@string/change_photo"
                 app:icon="@drawable/camera"
                 app:iconGravity="textStart"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppinsr"
-                android:text="Nama"
+                android:text="@string/name"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:layout_marginBottom="1dp"
@@ -83,7 +83,7 @@
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/poppinsb"
                 android:textStyle="bold"
-                android:text="Save Profile"
+                android:text="@string/save_profile"
                 android:background="@drawable/rounded"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

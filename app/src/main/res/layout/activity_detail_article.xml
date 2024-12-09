@@ -15,7 +15,7 @@
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="Article Detail"
+            app:title="@string/article_detail"
             android:background="?android:attr/colorBackground"
             app:navigationIcon="@drawable/arrow_back"
             app:navigationContentDescription="Back"
@@ -51,7 +51,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:textColor="@color/green"
-            tools:text="Article Title Goes Here"/>
+            tools:text="@string/article_title_goes_here"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvArticleDescription"
@@ -69,7 +69,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvArticleTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="A brief description of the article content goes here. This provides more context about the topic and draws the reader in."/>
+            tools:text="@string/disease_decryption_goes_here"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvHandlingSteps"
@@ -89,7 +89,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/btnShare"
-            tools:text="Deskripsi Lanjutan"/>
+            tools:text="@string/disease_handling_decryption_goes_here"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnShare"
@@ -98,7 +98,7 @@
             android:layout_marginTop="16dp"
             android:textStyle="bold"
             android:textSize="16sp"
-            android:text="Share"
+            android:text="@string/share"
             android:textColor="@android:color/white"
             android:backgroundTint="@color/green"
             android:background="@drawable/rounded_top"

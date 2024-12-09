@@ -19,7 +19,7 @@
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="Articles"
+            app:title="@string/articles"
             android:background="@android:color/transparent"
             app:titleTextColor="@color/text_primary"/>
     </com.google.android.material.appbar.AppBarLayout>

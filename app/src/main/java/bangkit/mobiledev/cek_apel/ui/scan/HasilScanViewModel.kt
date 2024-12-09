@@ -1,20 +1,24 @@
 package bangkit.mobiledev.cek_apel.ui.scan
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import bangkit.mobiledev.cek_apel.data.response.ModelMLResponse
 import bangkit.mobiledev.cek_apel.data.retrofit.ApiConfig
-import bangkit.mobiledev.cek_apel.utils.reduceFileImage // Impor fungsi dari utils
+import bangkit.mobiledev.cek_apel.utils.reduceFileImage
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
-class ScanViewModel : ViewModel() {
+class HasilScanViewModel(application: Application) : AndroidViewModel(application) {
     private val apiService = ApiConfig.getApiService()
 
     private val _predictionResult = MutableLiveData<Result<ModelMLResponse>>()
@@ -23,7 +27,7 @@ class ScanViewModel : ViewModel() {
     fun predictImage(imageFile: File, description: String = "Apple classification") {
         viewModelScope.launch {
             try {
-                // Gunakan fungsi reduceFileImage dari utils
+                // Compress the image file
                 val compressedFile = imageFile.reduceFileImage()
 
                 // Prepare image multipart
@@ -37,12 +41,17 @@ class ScanViewModel : ViewModel() {
                 // Prepare description
                 val descriptionRequestBody = description.toRequestBody("text/plain".toMediaType())
 
+                // Get current timestamp
+                val currentDateTime = getCurrentDateTime()
+
                 // Make API call
                 val response = apiService.predictImage(imageMultipart, descriptionRequestBody)
 
                 if (response.isSuccessful) {
-                    response.body()?.let {
-                        _predictionResult.value = Result.success(it)
+                    response.body()?.let { mlResponse ->
+                        // Optionally override the created at timestamp from the server
+                        mlResponse.data.createdAt = currentDateTime
+                        _predictionResult.value = Result.success(mlResponse)
                     } ?: run {
                         _predictionResult.value = Result.failure(Exception("Empty response body"))
                     }
@@ -55,5 +64,10 @@ class ScanViewModel : ViewModel() {
                 _predictionResult.value = Result.failure(e)
             }
         }
+    }
+
+    private fun getCurrentDateTime(): String {
+        val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault())
+        return sdf.format(Date())
     }
 }

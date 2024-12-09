@@ -1,37 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.scan.HasilScanActivity">
+    android:background="#F0F4F8">
 
-    <LinearLayout
+    <!-- Bagian AppBar tetap sama -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:gravity="center_horizontal">
+        android:background="@android:color/transparent">
 
-        <ImageView
-            android:id="@+id/result_image"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/ic_launcher_foreground"
-            android:layout_marginBottom="16dp"
-            android:layout_gravity="center"/>
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            app:navigationIcon="@drawable/arrow_back"
+            app:title="Scan Result"
+            app:titleTextColor="#2C3E50"/>
+    </com.google.android.material.appbar.AppBarLayout>
 
-        <TextView
-            android:id="@+id/result_text"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppinsr"
-            android:text="Hasil Analisis"
-            android:textSize="20sp"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="24dp"
-            android:textAlignment="center"/>
+            android:padding="10dp">
 
-    </LinearLayout>
-</ScrollView>
+            <!-- Bagian gambar dan judul tetap sama -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/result_image_card"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="12dp"
+                app:strokeWidth="0dp"
+                app:layout_constraintDimensionRatio="H,1:1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/result_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_foreground"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/result_image_card"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- Bagian container hasil -->
+            <LinearLayout
+                android:id="@+id/result_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/result_image_card"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <!-- Bagian judul dan deskripsi tetap sama -->
+                <TextView
+                    android:id="@+id/result_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinsb"
+                    android:textSize="24sp"
+                    android:textColor="#1A365D"
+                    android:textAlignment="center"
+                    tools:text="Apple Classification"/>
+
+                <TextView
+                    android:id="@+id/confidence_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinsr"
+                    android:textSize="14sp"
+                    android:textColor="#4A5568"
+                    android:textAlignment="center"
+                    android:layout_marginBottom="16dp"
+                    tools:text="Confidence: 95.5%"/>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="8dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="#FFFFFF">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Description"
+                            android:fontFamily="@font/poppinsb"
+                            android:textSize="18sp"
+                            android:textColor="#2D3748"
+                            android:layout_marginBottom="8dp"/>
+
+                        <TextView
+                            android:id="@+id/result_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppinsr"
+                            android:textSize="16sp"
+                            android:textColor="#4A5568"
+                            tools:text="Detailed description of the classification and its unique characteristics."/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Kartu suggestion dan medicine -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/suggestion_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Suggestions"
+                            android:fontFamily="@font/poppinsb"
+                            android:textSize="18sp"
+                            android:textColor="#2D3748"
+                            android:layout_marginBottom="8dp"/>
+
+                        <TextView
+                            android:id="@+id/suggestion_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppinsr"
+                            android:textSize="14sp"
+                            android:textColor="#4A5568"
+                            tools:text="Personalized care tips and recommendations."/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/medicine_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Medicine"
+                            android:fontFamily="@font/poppinsb"
+                            android:textSize="18sp"
+                            android:textColor="#2D3748"
+                            android:layout_marginBottom="8dp"/>
+
+                        <TextView
+                            android:id="@+id/medicine_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppinsr"
+                            android:textSize="14sp"
+                            android:textColor="#4A5568"
+                            tools:text="Recommended treatment options."/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Bagian created at -->
+                <TextView
+                    android:id="@+id/created_at"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinsb"
+                    android:textSize="12sp"
+                    android:textColor="#718096"
+                    android:textAlignment="textEnd"
+                    android:layout_marginTop="10dp"
+                    tools:text="Created at: 2024-03-15 10:30:45"/>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

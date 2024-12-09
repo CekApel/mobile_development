@@ -80,10 +80,6 @@ class SettingsFragment : Fragment() {
             activity?.finish()
         }
 
-        binding.languageChevron.setOnClickListener {
-            startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
-        }
-
         binding.aboutChevron.setOnClickListener {
             val intent = Intent(requireContext(), AboutActivity::class.java)
             startActivity(intent)

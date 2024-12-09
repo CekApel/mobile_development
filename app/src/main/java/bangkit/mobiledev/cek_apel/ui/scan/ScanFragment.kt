@@ -1,14 +1,13 @@
 package bangkit.mobiledev.cek_apel.ui.scan
 
 import android.Manifest
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -21,7 +20,6 @@ import androidx.fragment.app.viewModels
 import bangkit.mobiledev.cek_apel.R
 import bangkit.mobiledev.cek_apel.databinding.FragmentScanBinding
 import bangkit.mobiledev.cek_apel.utils.getImageUri
-import bangkit.mobiledev.cek_apel.utils.reduceFileImage
 import bangkit.mobiledev.cek_apel.utils.uriToFile
 
 class ScanFragment : Fragment() {
@@ -62,10 +60,14 @@ class ScanFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
         binding = FragmentScanBinding.inflate(inflater, container, false)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
-//        setHasOptionsMenu(true)
+
+        // Show the attention popup when the fragment is created
+        showAttentionPopup()
 
         currentImageUri = savedInstanceState?.getParcelable(STATE_IMAGE_URI)
 
@@ -80,6 +82,17 @@ class ScanFragment : Fragment() {
         binding.btnCekApel.setOnClickListener { analyzeImage() }
 
         return binding.root
+    }
+
+    private fun showAttentionPopup() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Perhatian")
+        builder.setMessage("Ini adalah hasil pemindaian daun apel, bukan buah apel")
+        builder.setPositiveButton("OK") { dialog: DialogInterface, _: Int ->
+            dialog.dismiss() // Dismiss the dialog when user clicks OK
+        }
+        builder.setCancelable(false) // Make the dialog non-cancelable by tapping outside
+        builder.show()
     }
 
     private fun startGallery() {
@@ -140,26 +153,6 @@ class ScanFragment : Fragment() {
         super.onSaveInstanceState(outState)
         outState.putParcelable(STATE_IMAGE_URI, currentImageUri)
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        super.onCreateOptionsMenu(menu, inflater)
-//        inflater.inflate(R.menu.menu_scan, menu)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when (item.itemId) {
-//            R.id.action_history -> {
-//                navigateToHistory()
-//                true
-//            }
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
-//
-//    private fun navigateToHistory() {
-//        val intent = Intent(requireContext(), HistoryScanActivity::class.java)
-//        startActivity(intent)
-//    }
 
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
