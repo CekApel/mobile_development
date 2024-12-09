@@ -6,24 +6,24 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import bangkit.mobiledev.cek_apel.database.entity.ScanHistoryEntity
 
-@Database(entities = [ScanHistoryEntity::class], version = 3, exportSchema = false)
+@Database(entities = [ScanHistoryEntity::class], version = 4, exportSchema = false)
 abstract class ScanHistoryDatabase : RoomDatabase() {
     abstract fun scanHistoryDao(): ScanHistoryDao
 
     companion object {
         @Volatile
-        private var INSTANCE: ScanHistoryDatabase? = null
+        private var INSTANCES: MutableMap<String, ScanHistoryDatabase> = mutableMapOf()
 
-        fun getDatabase(context: Context): ScanHistoryDatabase {
-            return INSTANCE ?: synchronized(this) {
+        fun getDatabase(context: Context, userId: String): ScanHistoryDatabase {
+            return INSTANCES[userId] ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     ScanHistoryDatabase::class.java,
-                    "scan_history_database"
+                    "scan_history_database_$userId"
                 )
-                    .fallbackToDestructiveMigration() // Simplest migration strategy
+                    .fallbackToDestructiveMigration()
                     .build()
-                INSTANCE = instance
+                INSTANCES[userId] = instance
                 instance
             }
         }
