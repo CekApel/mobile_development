@@ -32,11 +32,10 @@ class HistoryScanActivity : AppCompatActivity() {
                 viewModel.deleteScanHistory(scanHistory)
             },
             onDetailClick = { scanHistory ->
-                // TODO: Implement detail view for scan history
-                // Example: Start a detail activity
-                // val intent = Intent(this, ScanHistoryDetailActivity::class.java)
-                // intent.putExtra("scan_history", scanHistory)
-                // startActivity(intent)
+                val intent = Intent(this, DetailHistoryHasilScanActivity::class.java).apply {
+                    putExtra(DetailHistoryHasilScanActivity.EXTRA_SCAN_HISTORY_ID, scanHistory.id)
+                }
+                startActivity(intent)
             }
         )
 

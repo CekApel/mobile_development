@@ -12,6 +12,9 @@ interface ScanHistoryDao {
     @Query("SELECT * FROM scan_history ORDER BY id DESC")
     fun getAllScanHistory(): LiveData<List<ScanHistoryEntity>>
 
+    @Query("SELECT * FROM scan_history WHERE id = :id")
+    suspend fun getScanHistoryById(id: Long): ScanHistoryEntity?
+
     @Insert
     suspend fun insertScanHistory(scanHistory: ScanHistoryEntity)
 

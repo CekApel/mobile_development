@@ -15,6 +15,12 @@ class ScanHistoryRepository(private val scanHistoryDao: ScanHistoryDao) {
         }
     }
 
+    suspend fun getScanHistoryById(id: Long): ScanHistoryEntity? {
+        return withContext(Dispatchers.IO) {
+            scanHistoryDao.getScanHistoryById(id)
+        }
+    }
+
     suspend fun deleteScanHistory(scanHistory: ScanHistoryEntity) {
         withContext(Dispatchers.IO) {
             scanHistoryDao.deleteScanHistory(scanHistory)
