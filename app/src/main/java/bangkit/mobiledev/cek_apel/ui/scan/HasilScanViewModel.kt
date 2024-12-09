@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import bangkit.mobiledev.cek_apel.data.response.ModelMLResponse
 import bangkit.mobiledev.cek_apel.data.retrofit.ApiConfig
+import bangkit.mobiledev.cek_apel.database.entity.ScanHistoryEntity
 import bangkit.mobiledev.cek_apel.utils.reduceFileImage
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
@@ -20,6 +21,7 @@ import java.util.Locale
 
 class HasilScanViewModel(application: Application) : AndroidViewModel(application) {
     private val apiService = ApiConfig.getApiService()
+    private val historyScanViewModel = HistoryScanViewModel(application)
 
     private val _predictionResult = MutableLiveData<Result<ModelMLResponse>>()
     val predictionResult: LiveData<Result<ModelMLResponse>> = _predictionResult
@@ -49,6 +51,24 @@ class HasilScanViewModel(application: Application) : AndroidViewModel(applicatio
 
                 if (response.isSuccessful) {
                     response.body()?.let { mlResponse ->
+
+                        val scanHistory = ScanHistoryEntity(
+                            imageUri = imageFile.toString(),
+                            result = mlResponse.data.result,
+                            confidenceScore = mlResponse.data.confidenceScore,
+                            scanDate = getCurrentDateTime(),
+                            explanation = mlResponse.data.explanation,
+                            suggestion = mlResponse.data.suggestion,
+                            medicine = mlResponse.data.medicine
+                        )
+
+                        // Inject HistoryScanViewModel or repository to save
+                        historyScanViewModel.insertScanHistory(scanHistory)
+
+                        mlResponse.data.createdAt = currentDateTime
+                        _predictionResult.value = Result.success(mlResponse)
+
+
                         // Optionally override the created at timestamp from the server
                         mlResponse.data.createdAt = currentDateTime
                         _predictionResult.value = Result.success(mlResponse)

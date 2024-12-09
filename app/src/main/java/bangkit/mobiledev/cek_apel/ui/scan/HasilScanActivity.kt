@@ -65,21 +65,11 @@ class HasilScanActivity : AppCompatActivity() {
                 binding.confidenceText.text = "Confidence: ${mlResponse.data.confidenceScore}%"
                 binding.resultDescription.text = mlResponse.data.explanation
 
-                // Set suggestions
-                val suggestions = when (val suggestion = mlResponse.data.suggestion) {
-                    is String -> listOf(suggestion)
-                    is List<*> -> suggestion.filterIsInstance<String>()
-                    else -> emptyList()
-                }
-                binding.suggestionText.text = mlResponse.data.suggestion.toString()
+                // Set suggestions (now directly using the string)
+                binding.suggestionText.text = mlResponse.data.suggestion
 
-                // Set medicine recommendations
-                val medicines = when (val medicine = mlResponse.data.medicine) {
-                    is String -> listOf(medicine)
-                    is List<*> -> medicine.filterIsInstance<String>()
-                    else -> emptyList()
-                }
-                binding.medicineText.text = mlResponse.data.medicine.toString()
+                // Set medicine recommendations (now directly using the string)
+                binding.medicineText.text = mlResponse.data.medicine
 
                 // Set created at timestamp
                 binding.createdAt.text = "Created at: ${mlResponse.data.createdAt}"

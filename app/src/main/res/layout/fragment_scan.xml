@@ -19,6 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             app:title="@string/title_scan"
             android:background="@android:color/transparent"
+            app:menu="@menu/menu_scan"
             app:titleTextColor="@color/text_primary"/>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -54,7 +55,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:background="#E9F0F4"
-                    tools:src="@tools:sample/backgrounds/scenic"/>
+                    tools:src="@drawable/ic_launcher_foreground"/>
             </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout

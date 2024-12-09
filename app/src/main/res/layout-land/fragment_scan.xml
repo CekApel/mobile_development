@@ -54,7 +54,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:background="#E9F0F4"
-                    tools:src="@tools:sample/backgrounds/scenic"/>
+                    tools:src="@drawable/ic_launcher_foreground"/>
             </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout

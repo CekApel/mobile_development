@@ -8,6 +8,9 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -81,7 +84,41 @@ class ScanFragment : Fragment() {
         binding.btnKamera.setOnClickListener { startCamera() }
         binding.btnCekApel.setOnClickListener { analyzeImage() }
 
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.action_history -> {
+                    // Navigate to HistoryScanActivity
+                    val intent = Intent(requireContext(), HistoryScanActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                else -> false
+            }
+        }
+
+        setHasOptionsMenu(true)
+
+
+
         return binding.root
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_history -> {
+                // Navigate to HistoryScanActivity
+                val intent = Intent(requireContext(), HistoryScanActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    // Add this method to inflate the menu
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_scan, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun showAttentionPopup() {

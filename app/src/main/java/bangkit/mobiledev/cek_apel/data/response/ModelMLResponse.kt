@@ -26,10 +26,10 @@ data class Data(
 	val confidenceScore: Int,
 
 	@field:SerializedName("suggestion")
-	val suggestion: Any,
+	val suggestion: String,
 
 	@field:SerializedName("medicine")
-	val medicine: Any,
+	val medicine: String,
 
 	@field:SerializedName("explanation")
 	val explanation: String

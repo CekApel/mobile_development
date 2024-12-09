@@ -3,6 +3,7 @@ package bangkit.mobiledev.cek_apel.login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -56,8 +57,10 @@ class LoginActivity : AppCompatActivity() {
             val password = binding.passwordInput.text.toString().trim()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
+                binding.loginProgressBar.visibility = View.VISIBLE
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
+                        binding.loginProgressBar.visibility = View.GONE
                         if (task.isSuccessful) {
                             Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
                             navigateToMainActivity()
@@ -72,6 +75,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Google Sign-In
         binding.signInButton.setOnClickListener {
+            binding.loginProgressBar.visibility = View.VISIBLE
             signInWithGoogle()
         }
 
@@ -89,6 +93,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         supportActionBar?.hide()
+
     }
 
     private fun signInWithGoogle() {
@@ -111,6 +116,7 @@ class LoginActivity : AppCompatActivity() {
                 )
                 handleSignIn(result)
             } catch (e: GetCredentialException) {
+                binding.loginProgressBar.visibility = View.GONE
                 Log.d("Error", e.message.toString())
             }
         }
@@ -142,6 +148,7 @@ class LoginActivity : AppCompatActivity() {
         val credential: AuthCredential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
+                binding.loginProgressBar.visibility = View.GONE
                 if (task.isSuccessful) {
                     Log.d(TAG, "signInWithCredential:success")
                     val user: FirebaseUser? = auth.currentUser
