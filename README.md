@@ -29,3 +29,5 @@ Theme : Smart Agri-Fishery Solution: Agrotech and Fisheries Technology Integrati
 - Firebase
 - Room
 - TensorFlow Lite
+
+![alt text](?raw=true)(https://drive.google.com/file/d/1PyVp91_86NHBYOKP0p70gvQy8gXto61B/view?usp=sharing)
