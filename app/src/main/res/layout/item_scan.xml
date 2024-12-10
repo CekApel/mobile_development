@@ -57,7 +57,7 @@
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/poppinsr"
                     android:text="@string/scan_date"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:textColor="@color/date_text_color"
                     android:drawableStart="@drawable/calendar"
                     android:drawablePadding="4dp"
