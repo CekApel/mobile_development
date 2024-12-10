@@ -32,13 +32,10 @@ Theme : Smart Agri-Fishery Solution: Agrotech and Fisheries Technology Integrati
 
 ## Mockup Application
 ### Splash Screen
-![alt text](https://github.com/CekApel/Mockup/blob/master/SplashScreen.png?raw=true)
+![alt text](https://github.com/CekApel/Mockup_Application/blob/master/SplashScreen.png?raw=true)
 
 ### Home
-![alt text](https://github.com/CekApel/Mockup/blob/master/Home.png?raw=true)
+![alt text](https://github.com/CekApel/Mockup_Application/blob/master/Home.png?raw=true)
 
 ### Scan
-![alt text](https://github.com/CekApel/Mockup/blob/master/scan.png?raw=true)
-
-### Result Scan
-![alt text](https://github.com/CekApel/Mockup/blob/master/ScanResult.png?raw=true)
+![alt text](https://github.com/CekApel/Mockup_Application/blob/master/scan.png?raw=true) ![alt text](https://github.com/CekApel/Mockup_Application/blob/master/ScanResult.png?raw=true) ![alt text](https://github.com/CekApel/Mockup_Application/blob/master/ScanHistory.png?raw=true) ![alt text](https://github.com/CekApel/Mockup_Application/blob/master/ScanDetail.png?raw=true) 
