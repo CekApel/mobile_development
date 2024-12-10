@@ -1,170 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     tools:context=".register.RegisterActivity">
 
-    <LinearLayout
+    <!-- Main ScrollView Layout -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:layout_height="match_parent"
+        android:padding="16dp">
 
-        <!-- Logo -->
-        <ImageView
-            android:id="@+id/logoImage"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:src="@drawable/register"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp" />
-
-        <!-- App Title -->
-        <TextView
-            android:id="@+id/appTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/orbitron"
-            android:text="@string/register"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp"
-            android:gravity="center"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/tv_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppinsr"
-            android:text="@string/email"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:layout_marginBottom="1dp"
-            android:layout_gravity="start" />
-
-        <!-- Email Input -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/emailInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_marginBottom="16dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="1dp">
-
-            <bangkit.mobiledev.cek_apel.custom_view.EmailEditText
-                android:id="@+id/emailInputRegister"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:inputType="textEmailAddress"
-                android:padding="12dp"
-                android:background="@drawable/rounded" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/tv_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppinsr"
-            android:text="@string/password"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:layout_marginBottom="1dp"
-            android:layout_gravity="start" />
-
-        <!-- Password Input -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passwordInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:endIconMode="password_toggle"
-            android:layout_marginBottom="16dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="1dp">
-
-            <bangkit.mobiledev.cek_apel.custom_view.PasswordEditText
-                android:id="@+id/passwordInputRegister"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:inputType="textPassword"
-                android:background="@drawable/rounded" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/tv_passwordConfirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppinsr"
-            android:text="@string/confirm_password"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:layout_marginBottom="1dp"
-            android:layout_gravity="start" />
-
-        <!-- Confirm Password Input -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/confirmPasswordInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:endIconMode="password_toggle"
-            android:layout_marginBottom="16dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="1dp">
-
-            <bangkit.mobiledev.cek_apel.custom_view.PasswordEditText
-                android:id="@+id/confirmPasswordInput"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:inputType="textPassword"
-                android:padding="12dp"
-                android:background="@drawable/rounded" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Register Button -->
-        <Button
-            android:id="@+id/registerButton"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:textSize="16sp"
-            android:fontFamily="@font/poppinsb"
-            android:text="@string/register"
-            android:background="@drawable/rounded"
-            android:layout_marginBottom="16dp"
-            android:textColor="#FFF"
-            android:textStyle="bold" />
-
-        <!-- Login Redirect Text -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp">
+            android:orientation="vertical"
+            android:gravity="center">
 
+            <!-- Logo -->
+            <ImageView
+                android:id="@+id/logoImage"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/register"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:contentDescription="@string/illustration"/>
+
+            <!-- App Title -->
             <TextView
+                android:id="@+id/appTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/orbitron"
+                android:text="@string/register"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:textColor="@color/black" />
+
+            <!-- Email Text -->
+            <TextView
+                android:id="@+id/tv_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppinsr"
-                android:text="@string/account_confirmation_login"
-                android:textColor="#000" />
+                android:text="@string/email"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="1dp"
+                android:layout_gravity="start" />
 
+            <!-- Email Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="1dp">
+
+                <bangkit.mobiledev.cek_apel.custom_view.EmailEditText
+                    android:id="@+id/emailInputRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:inputType="textEmailAddress"
+                    android:padding="12dp"
+                    android:background="@drawable/rounded" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Password Text -->
             <TextView
-                android:id="@+id/loginLink"
+                android:id="@+id/tv_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinsb"
-                android:text="@string/login"
-                android:textColor="#4CAF50"
-                android:layout_marginStart="3dp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:fontFamily="@font/poppinsr"
+                android:text="@string/password"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="1dp"
+                android:layout_gravity="start" />
 
-    </LinearLayout>
-</ScrollView>
+            <!-- Password Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:endIconMode="password_toggle"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="1dp">
+
+                <bangkit.mobiledev.cek_apel.custom_view.PasswordEditText
+                    android:id="@+id/passwordInputRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:inputType="textPassword"
+                    android:background="@drawable/rounded" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Confirm Password Text -->
+            <TextView
+                android:id="@+id/tv_passwordConfirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppinsr"
+                android:text="@string/confirm_password"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="1dp"
+                android:layout_gravity="start" />
+
+            <!-- Confirm Password Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/confirmPasswordInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:endIconMode="password_toggle"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="1dp">
+
+                <bangkit.mobiledev.cek_apel.custom_view.PasswordEditText
+                    android:id="@+id/confirmPasswordInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:inputType="textPassword"
+                    android:padding="12dp"
+                    android:background="@drawable/rounded" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Register Button -->
+            <Button
+                android:id="@+id/registerButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppinsb"
+                android:text="@string/register"
+                android:background="@drawable/rounded"
+                android:layout_marginBottom="16dp"
+                android:textColor="#FFF"
+                android:textStyle="bold" />
+
+            <!-- Login Redirect Text -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinsr"
+                    android:text="@string/account_confirmation_login"
+                    android:textColor="#000" />
+
+                <TextView
+                    android:id="@+id/loginLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinsb"
+                    android:text="@string/login"
+                    android:textColor="#4CAF50"
+                    android:layout_marginStart="3dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- ProgressBar placed on top -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:visibility="gone"
+        android:indeterminate="true"
+        android:elevation="4dp"
+        android:indeterminateTint="@color/green"
+        android:layout_gravity="center" />
+
+</FrameLayout>

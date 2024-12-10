@@ -43,7 +43,7 @@
                     android:id="@+id/textTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Hasil Scan"
+                    android:text="@string/scan_result"
                     android:textStyle="bold"
                     android:textSize="18sp"
                     android:textColor="@color/primary_text_color"
@@ -56,11 +56,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/poppinsr"
-                    android:text="12 Desember 2023"
+                    android:text="@string/scan_date"
                     android:textSize="12sp"
                     android:textColor="@color/date_text_color"
                     android:drawableStart="@drawable/calendar"
-                    android:drawablePadding="8dp"
+                    android:drawablePadding="4dp"
                     android:gravity="center_vertical"/>
 
             </LinearLayout>
@@ -71,7 +71,7 @@
                 android:layout_height="40dp"
                 android:src="@drawable/delete"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Hapus Riwayat Scan"
+                android:contentDescription="@string/delete_scan_history"
                 android:padding="8dp"/>
 
         </LinearLayout>
@@ -87,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppinsb"
-            android:text="Lihat Detail"
+            android:text="@string/detail_view"
             android:textColor="@color/green"
             android:textAlignment="center"
             android:textStyle="bold"

@@ -12,11 +12,9 @@
     <string name="account_confirmation_login">Apakah kamu sudah punya akun?</string>
 
     <string name="login">Masuk</string>
-    <string name="forgot_password">Lupa Password</string>
+    <string name="forgot_password">Lupa Password?</string>
     <string name="login_option">Atau lanjutkan dengan</string>
     <string name="account_confirmation_register">Apakah kamu belum punya akun?</string>
-
-    <string name="ok">Ok</string>
 
     <string name="articles">Artikel</string>
 
@@ -39,7 +37,6 @@
 
     <string name="camera">Kamera</string>
     <string name="gallery">Galeri</string>
-    <string name="warning_scan">*Perhatian : Scan Daun Apel</string>
 
     <string name="about">Tentang Kami</string>
     <string name="app_version">Version 1.0.0</string>
@@ -50,12 +47,8 @@
 
     <string name="contact_information">Informasi Kontak</string>
     <string name="contact_email">Email: cekapel.capstone@gmail.com</string>
-    <string name="copyright">© 2024 Cek Apel. Hak cipta dilindungi undang-undang.</string>
+    <string name="copyright">Â© 2024 Cek Apel. Hak cipta dilindungi undang-undang.</string>
 
-    <string name="user_avatar">Ini adalah nama user</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="image_classifier_failed">Image classifier failed to initialize. See error logs for details</string>
 
     <string name="title_menu_1">Selamat Datang di Aplikasi Cek Apel</string>
     <string name="title_menu_2">Deteksi Penyakit Daun Apel</string>
@@ -69,8 +62,6 @@
 
     <string name="check_now">Cek Apel Sekarang</string>
 
-    <string name="no_results_found">Tidak ada hasil</string>
-
     <string name="email_invalid">Invalid email format</string>
     <string name="password_short">Password cannot be less than 6 characters</string>
     <string name="img_cant_found">Image not found</string>
@@ -81,6 +72,26 @@
     <string name="name">Nama</string>
     <string name="change_photo">Ganti Foto</string>
     <string name="save_profile">Simpan Profil</string>
+
+    <string name="description">Deskripsi</string>
+    <string name="suggestions">Saran</string>
+    <string name="medicine">Pengobatan</string>
+
+    <string name="illustration">Ilustrasi</string>
+    <string name="reset">Kirim Tautan Reset</string>
+
+    <string name="empty_scan_history">Tidak Ada Riwayat Scan</string>
+
+    <string name="empty_article">Tidak Ada Artikel Yang Tersedia</string>
+
+    <string name="scan_result">Hasil Scan</string>
+    <string name="scan_date">Tanggal Scan</string>
+    <string name="delete_scan_history">Hapus Riwayat Scan</string>
+    <string name="detail_view">Lihat Detail</string>
+
+    <string name="history">Riwayat</string>
+
+    <string name="forgot_password_description">Masukkan email Anda untuk menerima tautan reset password</string>
 
     <string name="your_web_client_id">488538856877-2vos3r4eanhnoitmjs26rs6cusnvsgqm.apps.googleusercontent.com</string>
 </resources>

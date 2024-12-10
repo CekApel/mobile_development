@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import bangkit.mobiledev.cek_apel.R
 import bangkit.mobiledev.cek_apel.adapter.ArticleAdapter
@@ -54,15 +53,12 @@ class HomeFragment : Fragment(), View.OnClickListener {
         return root
     }
 
-
     private fun setupArticleRecyclerView() {
         articleAdapter = ArticleAdapter { article ->
             navigateToArticleDetail(article)
         }
 
         binding.rvRecentArticles.apply {
-//            setPadding(0, 0, 0, 200)
-//            clipToPadding = false
             layoutManager = LinearLayoutManager(context)
             adapter = articleAdapter
             setHasFixedSize(true)
@@ -87,9 +83,14 @@ class HomeFragment : Fragment(), View.OnClickListener {
             articleAdapter.submitList(limitedArticles)
         }
 
-//        homeViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-//            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-//        }
+        homeViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            // Use safe call to handle nullable progressBar
+            if (isLoading) {
+                binding.progressBar?.visibility = View.VISIBLE  // Safe call
+            } else {
+                binding.progressBar?.visibility = View.GONE  // Safe call
+            }
+        }
 
         homeViewModel.error.observe(viewLifecycleOwner) { errorMessage ->
             if (!errorMessage.isNullOrEmpty()) {
@@ -100,11 +101,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     private fun parsePenangananPenyakit(data: String): List<String> {
         return try {
-            // Jika string adalah JSON array
+            // If the string is a JSON array
             val jsonArray = JsonParser.parseString(data).asJsonArray
             jsonArray.map { it.asString }
         } catch (e: Exception) {
-            // Jika bukan JSON array, pisahkan berdasarkan koma atau garis baru
+            // If it's not a JSON array, split by commas or newlines
             data.split(",")
                 .map { it.trim() }
                 .filter { it.isNotEmpty() }

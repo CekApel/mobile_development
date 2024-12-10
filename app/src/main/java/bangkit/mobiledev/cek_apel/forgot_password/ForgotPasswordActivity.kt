@@ -24,8 +24,14 @@ class ForgotPasswordActivity : AppCompatActivity() {
             val email = binding.emailInput.text.toString().trim()
 
             if (email.isNotEmpty()) {
+                // Show ProgressBar
+                binding.progressBar.visibility = android.view.View.VISIBLE
+
                 auth.sendPasswordResetEmail(email)
                     .addOnCompleteListener { task ->
+                        // Hide ProgressBar
+                        binding.progressBar.visibility = android.view.View.GONE
+
                         if (task.isSuccessful) {
                             Toast.makeText(
                                 this,
@@ -42,7 +48,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
                         }
                     }
             } else {
-                Toast.makeText(this, "Harap masukkan email Anda.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Harap masukkan email Anda", Toast.LENGTH_SHORT).show()
             }
         }
 

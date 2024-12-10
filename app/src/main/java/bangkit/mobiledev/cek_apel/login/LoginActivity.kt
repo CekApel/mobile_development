@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
@@ -18,7 +15,6 @@ import androidx.lifecycle.lifecycleScope
 import bangkit.mobiledev.cek_apel.MainActivity
 import bangkit.mobiledev.cek_apel.R
 import bangkit.mobiledev.cek_apel.databinding.ActivityLoginBinding
-import bangkit.mobiledev.cek_apel.databinding.ActivityMainBinding
 import bangkit.mobiledev.cek_apel.forgot_password.ForgotPasswordActivity
 import bangkit.mobiledev.cek_apel.register.RegisterActivity
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
@@ -57,25 +53,25 @@ class LoginActivity : AppCompatActivity() {
             val password = binding.passwordInput.text.toString().trim()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                binding.loginProgressBar.visibility = View.VISIBLE
+                showProgressBar(true) // Show ProgressBar before login attempt
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
-                        binding.loginProgressBar.visibility = View.GONE
+                        showProgressBar(false) // Hide ProgressBar after login attempt
+
                         if (task.isSuccessful) {
-                            Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Berhasil Masuk!", Toast.LENGTH_SHORT).show()
                             navigateToMainActivity()
                         } else {
-                            Toast.makeText(this, "Login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Gagal Masuk: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                         }
                     }
             } else {
-                Toast.makeText(this, "Please fill in all fields.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Harap isi semua kolom", Toast.LENGTH_SHORT).show()
             }
         }
 
         // Google Sign-In
         binding.signInButton.setOnClickListener {
-            binding.loginProgressBar.visibility = View.VISIBLE
             signInWithGoogle()
         }
 
@@ -87,13 +83,11 @@ class LoginActivity : AppCompatActivity() {
 
         // Register Link
         binding.registerLink.setOnClickListener {
-            // Navigate to Register Activity when "Register" is clicked
             val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
             startActivity(intent)
         }
 
         supportActionBar?.hide()
-
     }
 
     private fun signInWithGoogle() {
@@ -116,7 +110,6 @@ class LoginActivity : AppCompatActivity() {
                 )
                 handleSignIn(result)
             } catch (e: GetCredentialException) {
-                binding.loginProgressBar.visibility = View.GONE
                 Log.d("Error", e.message.toString())
             }
         }
@@ -148,7 +141,6 @@ class LoginActivity : AppCompatActivity() {
         val credential: AuthCredential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
-                binding.loginProgressBar.visibility = View.GONE
                 if (task.isSuccessful) {
                     Log.d(TAG, "signInWithCredential:success")
                     val user: FirebaseUser? = auth.currentUser
@@ -172,6 +164,14 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    private fun showProgressBar(show: Boolean) {
+        if (show) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 
     override fun onStart() {

@@ -54,7 +54,8 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:background="#E9F0F4"
-                    tools:src="@drawable/ic_launcher_foreground"/>
+                    tools:src="@drawable/ic_launcher_foreground"
+                    android:contentDescription="@string/illustration"/>
             </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
@@ -77,6 +78,9 @@
                     android:layout_marginStart="23dp"
                     android:fontFamily="@font/poppinsr"
                     android:textStyle="bold"
+                    app:icon="@drawable/camera"
+                    app:iconGravity="textStart"
+                    app:iconPadding="8dp"
                     android:text="@string/camera"
                     app:cornerRadius="10dp"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -93,6 +97,9 @@
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/poppinsr"
                     android:textStyle="bold"
+                    app:icon="@drawable/gallery"
+                    app:iconGravity="textStart"
+                    app:iconPadding="8dp"
                     android:text="@string/gallery"
                     app:cornerRadius="10dp"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"

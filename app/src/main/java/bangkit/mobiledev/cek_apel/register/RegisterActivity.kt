@@ -2,9 +2,9 @@ package bangkit.mobiledev.cek_apel.register
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import bangkit.mobiledev.cek_apel.R
 import bangkit.mobiledev.cek_apel.databinding.ActivityRegisterBinding
 import bangkit.mobiledev.cek_apel.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -33,8 +33,14 @@ class RegisterActivity : AppCompatActivity() {
             } else if (password != confirmPassword) {
                 Toast.makeText(this, "Password tidak cocok!", Toast.LENGTH_SHORT).show()
             } else {
+                // Show ProgressBar when registration starts
+                binding.progressBar.visibility = View.VISIBLE
+
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
+                        // Hide ProgressBar once registration is finished
+                        binding.progressBar.visibility = View.GONE
+
                         if (task.isSuccessful) {
                             auth.signOut()
                             Toast.makeText(this, "Registrasi berhasil! Silakan login.", Toast.LENGTH_SHORT).show()
