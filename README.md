@@ -34,8 +34,26 @@ Theme : Smart Agri-Fishery Solution: Agrotech and Fisheries Technology Integrati
 ### Splash Screen
 ![alt text](https://github.com/CekApel/Mockup_Application/blob/master/SplashScreen.png?raw=true)
 
+### OnBoarding
+![alt text](https://github.com/CekApel/Mockup_Application/blob/master/OnBoarding_1.png?raw=true) ![alt text](https://github.com/CekApel/Mockup_Application/blob/master/OnBoarding_2.png?raw=true) ![alt text](https://github.com/CekApel/Mockup_Application/blob/master/OnBoarding_3.png?raw=true)
+
+### Login
+![alt text](https://github.com/CekApel/Mockup_Application/blob/master/Login.png?raw=true)
+
+### Register
+![alt text](https://github.com/CekApel/Mockup_Application/blob/master/Register.png?raw=true)
+
+### Forgot Password
+![alt text](https://github.com/CekApel/Mockup_Application/blob/master/ForgotPassword.png?raw=true)
+
 ### Home
 ![alt text](https://github.com/CekApel/Mockup_Application/blob/master/Home.png?raw=true)
 
 ### Scan
 ![alt text](https://github.com/CekApel/Mockup_Application/blob/master/scan.png?raw=true) ![alt text](https://github.com/CekApel/Mockup_Application/blob/master/ScanResult.png?raw=true) ![alt text](https://github.com/CekApel/Mockup_Application/blob/master/ScanHistory.png?raw=true) ![alt text](https://github.com/CekApel/Mockup_Application/blob/master/ScanDetail.png?raw=true) 
+
+### Articles
+![alt text](https://github.com/CekApel/Mockup_Application/blob/master/Article.png?raw=true) ![alt text](https://github.com/CekApel/Mockup_Application/blob/master/ArticleDetail.png?raw=true)
+
+### Settings
+![alt text](https://github.com/CekApel/Mockup_Application/blob/master/Settings.png?raw=true) ![alt text](https://github.com/CekApel/Mockup_Application/blob/master/EditProfile.png?raw=true) ![alt text](https://github.com/CekApel/Mockup_Application/blob/master/About.png?raw=true)
