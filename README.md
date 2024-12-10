@@ -28,7 +28,7 @@ Theme : Smart Agri-Fishery Solution: Agrotech and Fisheries Technology Integrati
 - Retrofit
 - Firebase
 - Room
-- TensorFlow Lite
+- Retrofit
 
 ## Mockup Application
 ### Splash Screen
