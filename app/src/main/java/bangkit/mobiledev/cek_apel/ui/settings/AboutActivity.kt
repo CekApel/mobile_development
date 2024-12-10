@@ -12,11 +12,9 @@ class AboutActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        // Initialize view binding
         binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Setup back navigation for the toolbar
         binding.topAppBar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }

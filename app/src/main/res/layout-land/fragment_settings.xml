@@ -31,13 +31,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp"
+            android:padding="10dp"
             android:paddingBottom="96dp">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                android:layout_margin="10dp"
                 app:cardBackgroundColor="@color/background_secondary"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp">
@@ -46,7 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:layout_margin="10dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/profile_image"
@@ -84,6 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                android:layout_margin="10dp"
                 app:cardBackgroundColor="@color/background_secondary"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp">
@@ -123,8 +125,8 @@
                             android:layout_height="24dp"
                             android:src="@drawable/edit_profil"
                             android:layout_marginEnd="16dp"
-                            android:contentDescription="@string/illustration"
-                            app:tint="@color/text_primary"/>
+                            app:tint="@color/text_primary"
+                            android:contentDescription="@string/illustration"/>
 
                         <TextView
                             android:layout_width="0dp"
@@ -140,8 +142,8 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/chevron_right"
-                            android:contentDescription="@string/illustration"
-                            app:tint="@color/icon_color" />
+                            app:tint="@color/icon_color"
+                            android:contentDescription="@string/illustration"/>
                     </LinearLayout>
 
                     <com.google.android.material.divider.MaterialDivider
@@ -163,8 +165,8 @@
                             android:layout_height="24dp"
                             android:src="@drawable/about"
                             android:layout_marginEnd="16dp"
-                            android:contentDescription="@string/illustration"
-                            app:tint="@color/icon_color" />
+                            app:tint="@color/icon_color"
+                            android:contentDescription="@string/illustration"/>
 
                         <TextView
                             android:layout_width="0dp"
@@ -180,8 +182,8 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/chevron_right"
-                            android:contentDescription="@string/illustration"
-                            app:tint="@color/icon_color" />
+                            app:tint="@color/icon_color"
+                            android:contentDescription="@string/illustration"/>
                     </LinearLayout>
 
                     <com.google.android.material.divider.MaterialDivider
@@ -189,7 +191,6 @@
                         android:layout_height="wrap_content"
                         app:dividerColor="@color/divider_color"/>
 
-                    <!-- Add this inside the second MaterialCardView, under the Language option -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -202,8 +203,8 @@
                             android:layout_height="24dp"
                             android:src="@drawable/notification"
                             android:layout_marginEnd="16dp"
-                            android:contentDescription="@string/illustration"
-                            app:tint="@color/icon_color" />
+                            app:tint="@color/icon_color"
+                            android:contentDescription="@string/illustration"/>
 
                         <TextView
                             android:layout_width="0dp"
@@ -220,7 +221,14 @@
                             android:layout_height="wrap_content"
                             app:trackTint="@animator/switch_track_color"
                             app:thumbTint="@animator/switch_track_color"/>
+
                     </LinearLayout>
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:dividerColor="@color/divider_color"/>
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -228,7 +236,8 @@
                 android:id="@+id/logout_button"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_marginBottom="40dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:fontFamily="@font/poppinsb"
                 android:text="@string/logout"
                 android:textStyle="bold"

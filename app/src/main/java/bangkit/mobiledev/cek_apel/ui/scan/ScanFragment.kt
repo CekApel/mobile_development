@@ -48,7 +48,6 @@ class ScanFragment : Fragment() {
         if (isSuccess && currentImageUri != null) {
             showImage()
         } else {
-            // Reset currentImageUri jika kamera dibatalkan
             binding.placeholderImage.setImageResource(R.drawable.ic_launcher_foreground)
             currentImageUri = null
             Toast.makeText(requireContext(), getString(R.string.img_cant_found), Toast.LENGTH_SHORT).show()
@@ -69,7 +68,6 @@ class ScanFragment : Fragment() {
         binding = FragmentScanBinding.inflate(inflater, container, false)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
-        // Show the attention popup when the fragment is created
         showAttentionPopup()
 
         currentImageUri = savedInstanceState?.getParcelable(STATE_IMAGE_URI)
@@ -87,7 +85,6 @@ class ScanFragment : Fragment() {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.action_history -> {
-                    // Navigate to HistoryScanActivity
                     val intent = Intent(requireContext(), HistoryScanActivity::class.java)
                     startActivity(intent)
                     true
@@ -98,15 +95,12 @@ class ScanFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
-
-
         return binding.root
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_history -> {
-                // Navigate to HistoryScanActivity
                 val intent = Intent(requireContext(), HistoryScanActivity::class.java)
                 startActivity(intent)
                 true
@@ -115,7 +109,6 @@ class ScanFragment : Fragment() {
         }
     }
 
-    // Add this method to inflate the menu
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_scan, menu)
         super.onCreateOptionsMenu(menu, inflater)
@@ -124,11 +117,11 @@ class ScanFragment : Fragment() {
     private fun showAttentionPopup() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Perhatian")
-        builder.setMessage("Ini adalah hasil pemindaian daun apel, bukan buah apel")
-        builder.setPositiveButton("OK") { dialog: DialogInterface, _: Int ->
-            dialog.dismiss() // Dismiss the dialog when user clicks OK
+        builder.setMessage("Scan daun apel ya!")
+        builder.setPositiveButton("Ok") { dialog: DialogInterface, _: Int ->
+            dialog.dismiss()
         }
-        builder.setCancelable(false) // Make the dialog non-cancelable by tapping outside
+        builder.setCancelable(false)
         builder.show()
     }
 
@@ -137,7 +130,6 @@ class ScanFragment : Fragment() {
     }
 
     private fun startCamera() {
-        // Pastikan selalu membuat URI baru untuk foto
         currentImageUri = getImageUri(requireContext())
         if (currentImageUri == null) {
             Toast.makeText(requireContext(), getString(R.string.uri_photo_fail), Toast.LENGTH_SHORT).show()
@@ -160,7 +152,6 @@ class ScanFragment : Fragment() {
             if (imageFile.exists()) {
                 moveToResult(uri)
             } else {
-                // Reset gambar dan URI jika file tidak ada
                 binding.placeholderImage.setImageResource(R.drawable.ic_launcher_foreground)
                 currentImageUri = null
                 Toast.makeText(requireContext(), getString(R.string.img_empty), Toast.LENGTH_SHORT).show()

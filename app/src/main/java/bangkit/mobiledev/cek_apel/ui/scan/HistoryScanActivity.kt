@@ -49,7 +49,6 @@ class HistoryScanActivity : AppCompatActivity() {
         viewModel.allScanHistory.observe(this) { scanHistoryList ->
             scanHistoryAdapter.submitList(scanHistoryList)
 
-            // Toggle empty state visibility
             binding.emptyStateLayout.visibility =
                 if (scanHistoryList.isEmpty()) View.VISIBLE else View.GONE
         }

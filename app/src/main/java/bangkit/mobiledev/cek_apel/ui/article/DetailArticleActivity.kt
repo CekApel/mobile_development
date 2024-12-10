@@ -3,14 +3,18 @@ package bangkit.mobiledev.cek_apel.ui.article
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.Environment
+import android.os.Handler
+import android.os.Looper
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import bangkit.mobiledev.cek_apel.databinding.ActivityDetailArticleBinding
-import bangkit.mobiledev.cek_apel.utils.createCustomTempFile
 import java.io.File
 import java.io.FileOutputStream
 
@@ -24,6 +28,10 @@ class DetailArticleActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        binding.progressBar.visibility = View.VISIBLE
+
+        binding.btnShare.visibility = View.GONE
+
         val toolbar = binding.topAppBar
         toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
@@ -34,19 +42,24 @@ class DetailArticleActivity : AppCompatActivity() {
         val articleHandling = intent.getStringArrayListExtra("ARTICLE_HANDLING") ?: arrayListOf("Tidak ada informasi penanganan")
         val articleImageUrl = intent.getStringExtra("ARTICLE_IMAGE_URL") ?: ""
 
-        binding.apply {
-            tvArticleTitle.text = articleName
-            tvArticleDescription.text = articleDescription
-            Glide.with(this@DetailArticleActivity)
-                .load(articleImageUrl)
-                .into(ivArticle)
+        Handler(Looper.getMainLooper()).postDelayed({
+            binding.apply {
+                tvArticleTitle.text = articleName
+                tvArticleDescription.text = articleDescription
 
-            // Display handling steps without numbering
-            val handlingStepsText = articleHandling.joinToString("\n")
-            tvHandlingSteps.text = handlingStepsText
-        }
+                Glide.with(this@DetailArticleActivity)
+                    .load(articleImageUrl)
+                    .into(ivArticle)
 
-        // Setup Share button click listener
+                val handlingStepsText = articleHandling.joinToString("\n")
+                tvHandlingSteps.text = handlingStepsText
+
+                progressBar.visibility = View.GONE
+
+                btnShare.visibility = View.VISIBLE
+            }
+        }, 1000)
+
         binding.btnShare.setOnClickListener {
             shareArticleWithImage(articleName, articleDescription, articleHandling, articleImageUrl)
         }
@@ -58,8 +71,7 @@ class DetailArticleActivity : AppCompatActivity() {
         articleHandling: ArrayList<String>,
         articleImageUrl: String
     ) {
-        // Menggabungkan langkah penanganan dengan spasi
-        val handlingText = articleHandling.joinToString(" ")  // Tidak ada baris baru, hanya spasi
+        val handlingText = articleHandling.joinToString(" ")
         val shareText = """
         ${articleName.trim()}
     
@@ -68,7 +80,6 @@ class DetailArticleActivity : AppCompatActivity() {
         ${handlingText.trim()}
     """.trimIndent()
 
-        // Download image and share
         Glide.with(this)
             .asBitmap()
             .load(articleImageUrl)
@@ -76,33 +87,26 @@ class DetailArticleActivity : AppCompatActivity() {
                 @SuppressLint("QueryPermissionsNeeded")
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                     try {
-                        // Create a temporary file to store the image
-                        val imageFile = createCustomTempFile(this@DetailArticleActivity)
+                        val imageFile = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "shared_image.jpg")
                         val outputStream = FileOutputStream(imageFile)
-                        resource.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                        resource.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
                         outputStream.close()
 
-                        // Get content:// URI using FileProvider
-                        val imageUri = androidx.core.content.FileProvider.getUriForFile(
+                        val imageUri = FileProvider.getUriForFile(
                             this@DetailArticleActivity,
                             "${applicationContext.packageName}.fileprovider",
                             imageFile
                         )
 
-                        // Create share intent with multiple extras
                         val shareIntent = Intent(Intent.ACTION_SEND).apply {
                             type = "image/*"
                             putExtra(Intent.EXTRA_TEXT, shareText)
                             putExtra(Intent.EXTRA_STREAM, imageUri)
-
-                            // Explicitly grant read permission to all apps that can handle the intent
                             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                         }
 
-                        // Create a chooser intent with the share intent
                         val chooserIntent = Intent.createChooser(shareIntent, "Share article via")
 
-                        // Optional: Explicitly grant URI permissions to all target apps
                         val resInfoList = packageManager.queryIntentActivities(chooserIntent, 0)
                         for (resolveInfo in resInfoList) {
                             val packageName = resolveInfo.activityInfo.packageName
@@ -116,7 +120,6 @@ class DetailArticleActivity : AppCompatActivity() {
                         startActivity(chooserIntent)
                     } catch (e: Exception) {
                         e.printStackTrace()
-                        // Fallback to text-only sharing if image fails
                         val textShareIntent = Intent(Intent.ACTION_SEND).apply {
                             type = "text/plain"
                             putExtra(Intent.EXTRA_TEXT, shareText)
@@ -125,12 +128,10 @@ class DetailArticleActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onLoadCleared(placeholder: android.graphics.drawable.Drawable?) {
-                    // Handle image loading cancellation if needed
+                override fun onLoadCleared(placeholder: Drawable?) {
                 }
 
-                override fun onLoadFailed(errorDrawable: android.graphics.drawable.Drawable?) {
-                    // Fallback to text-only sharing if image loading fails
+                override fun onLoadFailed(errorDrawable: Drawable?) {
                     val textShareIntent = Intent(Intent.ACTION_SEND).apply {
                         type = "text/plain"
                         putExtra(Intent.EXTRA_TEXT, shareText)
@@ -139,5 +140,4 @@ class DetailArticleActivity : AppCompatActivity() {
                 }
             })
     }
-
 }

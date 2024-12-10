@@ -39,7 +39,6 @@ class EditProfilActivity : AppCompatActivity() {
 
         settingsViewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
 
-        // Restore image URI if available
         if (savedInstanceState != null) {
             val uriString = savedInstanceState.getString("selectedImageUri")
             uriString?.let {
@@ -51,7 +50,6 @@ class EditProfilActivity : AppCompatActivity() {
             }
         }
 
-        // Observe current profile
         settingsViewModel.userProfile.observe(this) { profile ->
             profile?.let {
                 binding.editName.setText(it.name)
@@ -66,13 +64,11 @@ class EditProfilActivity : AppCompatActivity() {
             }
         }
 
-        // Change photo button
         binding.changePhotoButton.setOnClickListener {
             val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             pickImageLauncher.launch(galleryIntent)
         }
 
-        // Save profile button
         binding.saveProfileButton.setOnClickListener {
             saveProfile()
         }

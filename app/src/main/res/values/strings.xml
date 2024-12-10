@@ -18,7 +18,7 @@
 
     <string name="articles">Artikel</string>
 
-    <string name="username">Nama Pengguna</string>
+    <string name="username">Nama</string>
     <string name="useremail">example@gmail.com</string>
     <string name="account_settings">Pengaturan Akun</string>
     <string name="edit_profile">Edit Profil</string>
@@ -41,13 +41,13 @@
     <string name="about">Tentang Kami</string>
     <string name="app_version">Version 1.0.0</string>
     <string name="about_our_app">Tentang Aplikasi Kami</string>
-    <string name="about_our_app_text">Cek-Apel adalah aplikasi mobile yang dirancang untuk membantu petani apel di Indonesia mengatasi penyakit tanaman secara efektif. Dengan memanfaatkan teknologi pengenalan gambar canggih, aplikasi ini memungkinkan pengguna untuk mengambil atau mengunggah foto daun apel untuk mendeteksi penyakit dengan cepat dan akurat. Aplikasi ini juga menyediakan rekomendasi khusus untuk pencegahan dan pengobatan, sehingga petani dapat mengambil tindakan tepat waktu untuk melindungi tanaman mereka.
+    <string name="about_our_app_text">Cek Apel adalah aplikasi mobile yang dirancang untuk membantu petani apel di Indonesia mengatasi penyakit tanaman secara efektif. Dengan memanfaatkan teknologi pengenalan gambar canggih, aplikasi ini memungkinkan pengguna untuk mengambil atau mengunggah foto daun apel untuk mendeteksi penyakit dengan cepat dan akurat. Aplikasi ini juga menyediakan rekomendasi khusus untuk pencegahan dan pengobatan, sehingga petani dapat mengambil tindakan tepat waktu untuk melindungi tanaman mereka.
 
-&#10;&#10;Selain fitur deteksinya, Cek-Apel juga memberikan berita dan artikel terbaru tentang kesehatan apel, menawarkan wawasan praktis dan strategi untuk mengelola kesehatan tanaman. Dengan Cek-Apel, petani dapat meningkatkan produktivitas, meminimalkan kerugian, dan berkontribusi pada sektor pertanian yang lebih berkelanjutan.</string>
+&#10;&#10;Selain fitur deteksinya, Cek Apel juga memberikan berita dan artikel terbaru tentang kesehatan apel, menawarkan wawasan praktis dan strategi untuk mengelola kesehatan tanaman. Dengan Cek Apel, petani dapat meningkatkan produktivitas, meminimalkan kerugian, dan berkontribusi pada sektor pertanian yang lebih berkelanjutan.</string>
 
     <string name="contact_information">Informasi Kontak</string>
     <string name="contact_email">Email: cekapel.capstone@gmail.com</string>
-    <string name="copyright">Â© 2024 Cek Apel. Hak cipta dilindungi undang-undang.</string>
+    <string name="copyright">© 2024 Cek Apel</string>
 
 
     <string name="title_menu_1">Selamat Datang di Aplikasi Cek Apel</string>
@@ -62,12 +62,12 @@
 
     <string name="check_now">Cek Apel Sekarang</string>
 
-    <string name="email_invalid">Invalid email format</string>
-    <string name="password_short">Password cannot be less than 6 characters</string>
-    <string name="img_cant_found">Image not found</string>
-    <string name="camera_permission">Camera permission is required to proceed</string>
-    <string name="uri_photo_fail">Failed to get the photo URI</string>
-    <string name="img_empty">Please insert the image file first</string>
+    <string name="email_invalid">Format email tidak valid</string>
+    <string name="password_short">Kata sandi setidaknya 6 karakter</string>
+    <string name="img_cant_found">Gambar tidak ditemukan</string>
+    <string name="camera_permission">Ijin kamera diperlukan untuk melanjutkan proses</string>
+    <string name="uri_photo_fail">Gagal mendapatkan URI foto</string>
+    <string name="img_empty">Masukkan gambar terlebih dahulu</string>
 
     <string name="name">Nama</string>
     <string name="change_photo">Ganti Foto</string>
@@ -90,6 +90,11 @@
     <string name="detail_view">Lihat Detail</string>
 
     <string name="history">Riwayat</string>
+
+    <string name="logout_confirmation_title">Keluar</string>
+    <string name="logout_confirmation_message">Anda yakin ingin keluar?</string>
+    <string name="yes">Iya</string>
+    <string name="no">Tidak</string>
 
     <string name="forgot_password_description">Masukkan email Anda untuk menerima tautan reset password</string>
 

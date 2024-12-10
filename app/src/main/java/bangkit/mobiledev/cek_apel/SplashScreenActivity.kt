@@ -1,5 +1,6 @@
 package bangkit.mobiledev.cek_apel
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashScreenBinding
@@ -21,12 +23,10 @@ class SplashScreenActivity : AppCompatActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
 
-        // Tampilkan splash screen selama beberapa detik sebelum cek login
         GlobalScope.launch(Dispatchers.Main) {
-            delay(3000) // Splash Screen tampil selama 3 detik
+            delay(3000)
             checkLoginStatus()
         }
 
@@ -34,13 +34,10 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private fun checkLoginStatus() {
-        // Periksa status autentikasi pengguna
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            // Pengguna sudah login, arahkan ke MainActivity
             navigateToMainActivity()
         } else {
-            // Pengguna belum login, arahkan ke OnboardingActivity
             navigateToOnboardingActivity()
         }
     }
@@ -48,12 +45,12 @@ class SplashScreenActivity : AppCompatActivity() {
     private fun navigateToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        finish() // Menutup SplashScreenActivity agar tidak bisa kembali
+        finish()
     }
 
     private fun navigateToOnboardingActivity() {
         val intent = Intent(this, OnboardingActivity::class.java)
         startActivity(intent)
-        finish() // Menutup SplashScreenActivity agar tidak bisa kembali
+        finish()
     }
 }

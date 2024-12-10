@@ -10,15 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Main Content -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="12dp"
+            android:layout_marginBottom="50dp"
             android:layout_gravity="top">
 
-            <!-- Toolbar -->
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/topAppBar"
                 android:layout_width="match_parent"
@@ -28,11 +27,11 @@
                 android:background="@android:color/transparent"
                 app:titleTextColor="@color/text_primary" />
 
-            <!-- App Info Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
+                android:layout_margin="10dp"
                 app:cardBackgroundColor="@color/background_secondary"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp">
@@ -40,15 +39,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="12dp">
+                    android:orientation="vertical">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:src="@drawable/logo"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="16dp" />
+                        android:layout_marginBottom="1dp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -59,7 +57,7 @@
                         android:textStyle="bold"
                         android:fontFamily="@font/poppinsb"
                         android:textColor="@color/text_primary"
-                        android:layout_marginBottom="8dp" />
+                        android:layout_marginBottom="1dp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -72,11 +70,11 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- About App Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="75dp"
+                android:layout_margin="10dp"
                 app:cardBackgroundColor="@color/background_secondary"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp">
@@ -85,7 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="12dp">
+                    android:padding="10dp">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -102,6 +100,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/about_our_app_text"
                         android:textSize="16sp"
+                        android:justificationMode="inter_word"
+                        android:lineSpacingExtra="4dp"
                         android:fontFamily="@font/poppinsr"
                         android:textColor="@color/text_secondary"
                         android:layout_marginBottom="16dp" />
@@ -127,7 +127,6 @@
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
 
-        <!-- Footer -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

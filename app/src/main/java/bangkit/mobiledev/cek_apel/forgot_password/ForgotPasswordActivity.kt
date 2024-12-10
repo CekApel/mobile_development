@@ -16,20 +16,16 @@ class ForgotPasswordActivity : AppCompatActivity() {
         binding = ActivityForgotPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
 
-        // Send Reset Link
         binding.sendResetLinkButton.setOnClickListener {
             val email = binding.emailInput.text.toString().trim()
 
             if (email.isNotEmpty()) {
-                // Show ProgressBar
                 binding.progressBar.visibility = android.view.View.VISIBLE
 
                 auth.sendPasswordResetEmail(email)
                     .addOnCompleteListener { task ->
-                        // Hide ProgressBar
                         binding.progressBar.visibility = android.view.View.GONE
 
                         if (task.isSuccessful) {

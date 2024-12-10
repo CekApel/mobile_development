@@ -35,6 +35,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:contentDescription="@string/illustration"
+                app:shapeAppearanceOverlay="@style/RoundedImageView"
                 tools:src="@tools:sample/avatars"/>
         </androidx.cardview.widget.CardView>
 

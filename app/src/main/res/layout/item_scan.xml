@@ -54,10 +54,10 @@
                     android:id="@+id/textScanDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="5dp"
                     android:fontFamily="@font/poppinsr"
                     android:text="@string/scan_date"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     android:textColor="@color/date_text_color"
                     android:drawableStart="@drawable/calendar"
                     android:drawablePadding="4dp"
@@ -67,8 +67,8 @@
 
             <ImageButton
                 android:id="@+id/buttonDelete"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
                 android:src="@drawable/delete"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/delete_scan_history"
@@ -79,7 +79,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#E0E0E0"
+            android:background="@color/black"
             android:layout_marginTop="16dp"/>
 
         <TextView

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import bangkit.mobiledev.cek_apel.data.response.ModelMLResponse
 import bangkit.mobiledev.cek_apel.data.retrofit.ApiConfig
-import bangkit.mobiledev.cek_apel.utils.reduceFileImage // Impor fungsi dari utils
+import bangkit.mobiledev.cek_apel.utils.reduceFileImage
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -23,10 +23,8 @@ class ScanViewModel : ViewModel() {
     fun predictImage(imageFile: File, description: String = "Apple classification") {
         viewModelScope.launch {
             try {
-                // Gunakan fungsi reduceFileImage dari utils
                 val compressedFile = imageFile.reduceFileImage()
 
-                // Prepare image multipart
                 val requestImageFile = compressedFile.asRequestBody("image/jpeg".toMediaType())
                 val imageMultipart = MultipartBody.Part.createFormData(
                     "image",
@@ -34,10 +32,8 @@ class ScanViewModel : ViewModel() {
                     requestImageFile
                 )
 
-                // Prepare description
                 val descriptionRequestBody = description.toRequestBody("text/plain".toMediaType())
 
-                // Make API call
                 val response = apiService.predictImage(imageMultipart, descriptionRequestBody)
 
                 if (response.isSuccessful) {

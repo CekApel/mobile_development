@@ -29,10 +29,8 @@ class HasilScanViewModel(application: Application) : AndroidViewModel(applicatio
     fun predictImage(imageFile: File, description: String = "Apple classification") {
         viewModelScope.launch {
             try {
-                // Compress the image file
                 val compressedFile = imageFile.reduceFileImage()
 
-                // Prepare image multipart
                 val requestImageFile = compressedFile.asRequestBody("image/jpeg".toMediaType())
                 val imageMultipart = MultipartBody.Part.createFormData(
                     "image",
@@ -40,13 +38,10 @@ class HasilScanViewModel(application: Application) : AndroidViewModel(applicatio
                     requestImageFile
                 )
 
-                // Prepare description
                 val descriptionRequestBody = description.toRequestBody("text/plain".toMediaType())
 
-                // Get current timestamp
                 val currentDateTime = getCurrentDateTime()
 
-                // Make API call
                 val response = apiService.predictImage(imageMultipart, descriptionRequestBody)
 
                 if (response.isSuccessful) {
@@ -62,14 +57,11 @@ class HasilScanViewModel(application: Application) : AndroidViewModel(applicatio
                             medicine = mlResponse.data.medicine
                         )
 
-                        // Inject HistoryScanViewModel or repository to save
                         historyScanViewModel.insertScanHistory(scanHistory)
 
                         mlResponse.data.createdAt = currentDateTime
                         _predictionResult.value = Result.success(mlResponse)
 
-
-                        // Optionally override the created at timestamp from the server
                         mlResponse.data.createdAt = currentDateTime
                         _predictionResult.value = Result.success(mlResponse)
                     } ?: run {

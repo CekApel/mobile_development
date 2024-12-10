@@ -28,8 +28,4 @@ class HistoryScanViewModel(application: Application) : AndroidViewModel(applicat
     fun deleteScanHistory(scanHistory: ScanHistoryEntity) = viewModelScope.launch {
         repository.deleteScanHistory(scanHistory)
     }
-
-    fun deleteAllScanHistory() = viewModelScope.launch {
-        repository.deleteAllScanHistory()
-    }
 }

@@ -19,10 +19,8 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
 
-        // Register Button Click Listener
         binding.registerButton.setOnClickListener {
             val email = binding.emailInputRegister.text.toString().trim()
             val password = binding.passwordInputRegister.text.toString().trim()
@@ -33,12 +31,10 @@ class RegisterActivity : AppCompatActivity() {
             } else if (password != confirmPassword) {
                 Toast.makeText(this, "Password tidak cocok!", Toast.LENGTH_SHORT).show()
             } else {
-                // Show ProgressBar when registration starts
                 binding.progressBar.visibility = View.VISIBLE
 
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
-                        // Hide ProgressBar once registration is finished
                         binding.progressBar.visibility = View.GONE
 
                         if (task.isSuccessful) {
@@ -47,7 +43,7 @@ class RegisterActivity : AppCompatActivity() {
                             val intent = Intent(this, LoginActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                             startActivity(intent)
-                            finish() // Finish RegisterActivity to avoid stacking.
+                            finish()
                         } else {
                             Toast.makeText(this, "Registrasi gagal: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                         }
@@ -55,12 +51,11 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        // Login Link
         binding.loginLink.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
-            finish() // Finish RegisterActivity to avoid stacking.
+            finish()
         }
 
         supportActionBar?.hide()
@@ -71,6 +66,6 @@ class RegisterActivity : AppCompatActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
-        finish() // Ensure no stacked activity remains.
+        finish()
     }
 }

@@ -2,7 +2,6 @@ package bangkit.mobiledev.cek_apel.ui.article
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +38,6 @@ class ArticleFragment : Fragment() {
 
     private fun setupRecyclerView() {
         articleAdapter = ArticleAdapter { article ->
-            // Parse penangananPenyakit
             val handlingList = parsePenangananPenyakit(article.penangananPenyakit)
 
             val intent = Intent(requireContext(), DetailArticleActivity::class.java).apply {
@@ -76,14 +74,11 @@ class ArticleFragment : Fragment() {
         articleViewModel.fetchArticles()
     }
 
-    // Fungsi untuk mengonversi penangananPenyakit dari String menjadi List<String>
     private fun parsePenangananPenyakit(data: String): List<String> {
         return try {
-            // Jika string adalah JSON array
             val jsonArray = JsonParser.parseString(data).asJsonArray
             jsonArray.map { it.asString }
         } catch (e: Exception) {
-            // Jika bukan JSON array, pisahkan berdasarkan koma atau garis baru
             data.split(",")
                 .map { it.trim() }
                 .filter { it.isNotEmpty() }

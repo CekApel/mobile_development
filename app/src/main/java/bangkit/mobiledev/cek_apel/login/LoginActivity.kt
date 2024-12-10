@@ -38,25 +38,22 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize Firebase Auth
         auth = Firebase.auth
 
-        // Check if the user is already logged in
         val currentUser = auth.currentUser
         if (currentUser != null) {
             navigateToMainActivity()
         }
 
-        // Email and Password login
         binding.loginButton.setOnClickListener {
             val email = binding.emailInput.text.toString().trim()
             val password = binding.passwordInput.text.toString().trim()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                showProgressBar(true) // Show ProgressBar before login attempt
+                showProgressBar(true)
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
-                        showProgressBar(false) // Hide ProgressBar after login attempt
+                        showProgressBar(false)
 
                         if (task.isSuccessful) {
                             Toast.makeText(this, "Berhasil Masuk!", Toast.LENGTH_SHORT).show()
@@ -70,18 +67,15 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        // Google Sign-In
         binding.signInButton.setOnClickListener {
             signInWithGoogle()
         }
 
-        // Forgot Password
         binding.forgotPasswordText.setOnClickListener {
             val intent = Intent(this, ForgotPasswordActivity::class.java)
             startActivity(intent)
         }
 
-        // Register Link
         binding.registerLink.setOnClickListener {
             val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
             startActivity(intent)

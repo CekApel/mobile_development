@@ -48,7 +48,6 @@
         app:layout_constraintStart_toStartOf="@+id/titleMenu1"
         app:layout_constraintTop_toBottomOf="@+id/titleMenu1" />
 
-    <!-- Similar changes applied to other menu items (logoMenu2, logoMenu3, logoMenu4) -->
     <ImageView
         android:id="@+id/logoMenu2"
         android:layout_width="0dp"
@@ -89,7 +88,6 @@
         app:layout_constraintTop_toBottomOf="@+id/titleMenu2"
         android:text="@string/desc_menu_2" />
 
-    <!-- Repeat similar changes for logoMenu3 and logoMenu4 -->
     <ImageView
         android:id="@+id/logoMenu3"
         android:layout_width="0dp"
@@ -170,7 +168,6 @@
         app:layout_constraintTop_toBottomOf="@+id/titleMenu4"
         android:text="@string/desc_menu_4" />
 
-    <!-- Menu indicators and button remain the same -->
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/menu1"
         android:layout_width="30dp"

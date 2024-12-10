@@ -6,14 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Bagian AppBar -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent">
 
-        <!-- Toolbar yang diubah -->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
@@ -37,12 +35,12 @@
             android:layout_height="wrap_content"
             android:padding="10dp">
 
-            <!-- Bagian gambar dan judul tetap sama -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/result_image_card"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="16dp"
+                android:layout_margin="10dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="12dp"
                 app:strokeWidth="0dp"
@@ -70,7 +68,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <!-- Bagian container hasil -->
             <LinearLayout
                 android:id="@+id/result_container"
                 android:layout_width="0dp"
@@ -78,18 +75,18 @@
                 android:orientation="vertical"
                 android:visibility="visible"
                 android:layout_marginTop="16dp"
+                android:layout_margin="10dp"
                 app:layout_constraintTop_toBottomOf="@id/result_image_card"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
-                <!-- Bagian judul dan deskripsi tetap sama -->
                 <TextView
                     android:id="@+id/result_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinsb"
                     android:textSize="24sp"
-                    android:textColor="#1A365D"
+                    android:textColor="@color/green"
                     android:textAlignment="center"
                     tools:text="Apple Classification"/>
 
@@ -99,24 +96,25 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinsr"
                     android:textSize="14sp"
-                    android:textColor="#4A5568"
+                    android:textColor="@color/black"
                     android:textAlignment="center"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="10dp"
                     tools:text="Confidence: 95.5%"/>
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="16dp"
+                    android:layout_margin="10dp"
                     app:cardElevation="8dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="8dp"
                     app:cardBackgroundColor="#FFFFFF">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:padding="10dp">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -124,8 +122,8 @@
                             android:text="@string/description"
                             android:fontFamily="@font/poppinsb"
                             android:textSize="18sp"
-                            android:textColor="#2D3748"
-                            android:layout_marginBottom="8dp"/>
+                            android:textColor="@color/black"
+                            android:layout_marginBottom="5dp"/>
 
                         <TextView
                             android:id="@+id/result_description"
@@ -133,17 +131,17 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppinsr"
                             android:textSize="16sp"
-                            android:textColor="#4A5568"
+                            android:textColor="@color/black"
                             tools:text="Detailed description of the classification and its unique characteristics."/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Kartu suggestion dan medicine -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/suggestion_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:layout_margin="10dp"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="8dp">
 
@@ -151,7 +149,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:padding="10dp">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -159,8 +157,8 @@
                             android:text="@string/suggestions"
                             android:fontFamily="@font/poppinsb"
                             android:textSize="18sp"
-                            android:textColor="#2D3748"
-                            android:layout_marginBottom="8dp"/>
+                            android:textColor="@color/black"
+                            android:layout_marginBottom="5dp"/>
 
                         <TextView
                             android:id="@+id/suggestion_text"
@@ -168,7 +166,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppinsr"
                             android:textSize="14sp"
-                            android:textColor="#4A5568"
+                            android:textColor="@color/black"
                             tools:text="Personalized care tips and recommendations."/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -178,6 +176,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
+                    android:layout_margin="10dp"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="8dp">
 
@@ -185,7 +184,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:padding="10dp">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -193,8 +192,8 @@
                             android:text="@string/medicine"
                             android:fontFamily="@font/poppinsb"
                             android:textSize="18sp"
-                            android:textColor="#2D3748"
-                            android:layout_marginBottom="8dp"/>
+                            android:textColor="@color/black"
+                            android:layout_marginBottom="5dp"/>
 
                         <TextView
                             android:id="@+id/medicine_text"
@@ -202,19 +201,19 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppinsr"
                             android:textSize="14sp"
-                            android:textColor="#4A5568"
+                            android:textColor="@color/black"
                             tools:text="Recommended treatment options."/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Bagian created at -->
                 <TextView
                     android:id="@+id/created_at"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinsb"
+                    android:layout_marginEnd="10dp"
                     android:textSize="12sp"
-                    android:textColor="#718096"
+                    android:textColor="@color/black"
                     android:textAlignment="textEnd"
                     android:layout_marginTop="10dp"
                     tools:text="Created at: 2024-03-15 10:30:45"/>

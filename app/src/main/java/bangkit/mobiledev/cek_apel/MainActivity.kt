@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
 
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser == null) {
-            // Jika belum login, arahkan ke LoginActivity
             val loginIntent = Intent(this, LoginActivity::class.java)
             loginIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(loginIntent)
@@ -34,16 +33,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Setup NavController dan BottomNavigationView
         navController = findNavController(R.id.nav_host_fragment_activity_main)
         binding.navView.setupWithNavController(navController)
 
-        // Tambahkan custom listener untuk BottomNavigationView
         binding.navView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.navigation_home -> {
                     val navOptions = NavOptions.Builder()
-                        .setPopUpTo(R.id.navigation_home, true) // Bersihkan stack sampai Home
+                        .setPopUpTo(R.id.navigation_home, true)
                         .build()
                     navController.navigate(R.id.navigation_home, null, navOptions)
                     true

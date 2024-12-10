@@ -31,10 +31,7 @@ class ScanHistoryAdapter(
                 textTitle.text = scanHistory.result
                 textScanDate.text = scanHistory.scanDate
 
-                // Assuming you have a method to load image from URI
-                // image.loadImageFromUri(scanHistory.imageUri)
-
-                scanHistory.imageUri?.let { uri ->
+                scanHistory.imageUri.let { uri ->
                     Glide.with(itemView.context)
                         .load(uri)
                         .into(image)

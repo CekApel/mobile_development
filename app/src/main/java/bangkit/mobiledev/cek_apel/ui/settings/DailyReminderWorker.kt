@@ -29,7 +29,6 @@ class DailyReminderWorker(
     private val settingsPreferences = SettingsPreferences(context)
 
     override suspend fun doWork(): Result {
-        // Check if notifications are enabled in app settings
         val isNotificationEnabled = settingsPreferences.isNotificationEnabled.first()
 
         if (isNotificationEnabled && hasNotificationPermission()) {
@@ -40,14 +39,12 @@ class DailyReminderWorker(
     }
 
     private fun hasNotificationPermission(): Boolean {
-        // For Android 13 (API 33) and above, check runtime permission
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             ActivityCompat.checkSelfPermission(
                 context,
                 Manifest.permission.POST_NOTIFICATIONS
             ) == PackageManager.PERMISSION_GRANTED
         } else {
-            // For older versions, notifications are granted by default
             true
         }
     }
@@ -73,14 +70,12 @@ class DailyReminderWorker(
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 
-        // Check notification permission before showing
         if (hasNotificationPermission()) {
             try {
                 with(NotificationManagerCompat.from(context)) {
                     notify(NOTIFICATION_ID, builder.build())
                 }
             } catch (e: SecurityException) {
-                // Log or handle the exception as necessary
                 e.printStackTrace()
             }
         }
@@ -112,7 +107,7 @@ class DailyReminderWorker(
 
         fun scheduleReminder(context: Context) {
             val dailyWorkRequest = PeriodicWorkRequestBuilder<DailyReminderWorker>(
-                1, TimeUnit.DAYS  // Interval of 1 day
+                1, TimeUnit.DAYS
             ).build()
 
             WorkManager.getInstance(context).enqueueUniquePeriodicWork(

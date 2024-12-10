@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import bangkit.mobiledev.cek_apel.R
 import bangkit.mobiledev.cek_apel.databinding.FragmentSettingsBinding
 import bangkit.mobiledev.cek_apel.login.LoginActivity
 import com.bumptech.glide.Glide
@@ -39,15 +39,12 @@ class SettingsFragment : Fragment() {
 
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
-        // Initialize ViewModel and Settings Manager
         settingsViewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
         settingsPreferences = SettingsPreferences(requireContext())
 
-        // Set email from Firebase
         val currentUser = FirebaseAuth.getInstance().currentUser
         binding.userEmail.text = currentUser?.email ?: "No email"
 
-        // Observe user profile
         settingsViewModel.userProfile.observe(viewLifecycleOwner) { profile ->
             binding.userName.text = profile?.name ?: "User Name"
 
@@ -59,10 +56,8 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        // Setup buttons
         setupButtonListeners()
 
-        // Setup notification toggle
         setupNotificationToggle()
 
         return binding.root
@@ -75,9 +70,7 @@ class SettingsFragment : Fragment() {
         }
 
         binding.logoutButton.setOnClickListener {
-            settingsViewModel.logout()
-            startActivity(Intent(activity, LoginActivity::class.java))
-            activity?.finish()
+            showLogoutConfirmationDialog()
         }
 
         binding.aboutChevron.setOnClickListener {
@@ -86,21 +79,33 @@ class SettingsFragment : Fragment() {
         }
     }
 
+    private fun showLogoutConfirmationDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.logout_confirmation_title))
+            .setMessage(getString(R.string.logout_confirmation_message))
+            .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                settingsViewModel.logout()
+                startActivity(Intent(activity, LoginActivity::class.java))
+                activity?.finish()
+            }
+            .setNegativeButton(getString(R.string.no)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
     private val notificationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
         if (isGranted) {
-            // Permission granted, ensure notification is enabled
             binding.notificationSwitch.isChecked = true
             DailyReminderWorker.scheduleReminder(requireContext())
         } else {
-            // Permission denied, uncheck the switch
             binding.notificationSwitch.isChecked = false
         }
     }
 
     private fun setupNotificationToggle() {
-        // Observe current notification setting
         viewLifecycleOwner.lifecycleScope.launch {
             settingsPreferences.isNotificationEnabled.collect { isEnabled ->
                 val hasPermission = Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU ||
@@ -109,39 +114,31 @@ class SettingsFragment : Fragment() {
                             Manifest.permission.POST_NOTIFICATIONS
                         ) == PackageManager.PERMISSION_GRANTED
 
-                // Update switch state based on both saved preference and permission
                 binding.notificationSwitch.isChecked = isEnabled && hasPermission
             }
         }
 
-        // Set listener for switch
         binding.notificationSwitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                // Check and request notification permission for Android 13+
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                     when {
                         ContextCompat.checkSelfPermission(
                             requireContext(),
                             Manifest.permission.POST_NOTIFICATIONS
                         ) == PackageManager.PERMISSION_GRANTED -> {
-                            // Permission already granted
                             scheduleNotification(true)
                         }
                         shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) -> {
-                            // Show rationale dialog
                             showPermissionRationaleDialog()
                         }
                         else -> {
-                            // Request permission
                             notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                         }
                     }
                 } else {
-                    // For older Android versions, just schedule
                     scheduleNotification(true)
                 }
             } else {
-                // Cancel notification when switch is turned off
                 scheduleNotification(false)
             }
         }
@@ -166,7 +163,6 @@ class SettingsFragment : Fragment() {
             }
         }
     }
-
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun showPermissionRationaleDialog() {

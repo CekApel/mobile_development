@@ -35,16 +35,12 @@ class HomeFragment : Fragment(), View.OnClickListener {
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         val root: View = binding.root
 
-        // Initialize ViewModel
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
-        // Setup UI
         setupArticleRecyclerView()
 
-        // Observe ViewModel LiveData
         observeViewModel()
 
-        // Fetch articles
         homeViewModel.fetchArticles()
 
         binding.cardScan.setOnClickListener(this)
@@ -84,11 +80,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
         }
 
         homeViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            // Use safe call to handle nullable progressBar
             if (isLoading) {
-                binding.progressBar?.visibility = View.VISIBLE  // Safe call
+                binding.progressBar.visibility = View.VISIBLE
             } else {
-                binding.progressBar?.visibility = View.GONE  // Safe call
+                binding.progressBar.visibility = View.GONE
             }
         }
 
@@ -101,11 +96,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     private fun parsePenangananPenyakit(data: String): List<String> {
         return try {
-            // If the string is a JSON array
             val jsonArray = JsonParser.parseString(data).asJsonArray
             jsonArray.map { it.asString }
         } catch (e: Exception) {
-            // If it's not a JSON array, split by commas or newlines
             data.split(",")
                 .map { it.trim() }
                 .filter { it.isNotEmpty() }
