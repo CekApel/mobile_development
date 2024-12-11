@@ -56,4 +56,4 @@ Theme : Smart Agri-Fishery Solution: Agrotech and Fisheries Technology Integrati
 ![alt text](https://github.com/CekApel/Mockup_Application/blob/master/Article.png?raw=true) ![alt text](https://github.com/CekApel/Mockup_Application/blob/master/ArticleDetail.png?raw=true)
 
 ### Settings
-![alt text](https://github.com/CekApel/Mockup_Application/blob/master/Settings.png?raw=true) ![alt text](https://github.com/CekApel/Mockup_Application/blob/master/EditProfile.png?raw=true) ![alt text](https://github.com/CekApel/Mockup_Application/blob/master/About.png?raw=true)
+![alt text](https://github.com/CekApel/Mockup_Application/blob/master/Profil.png?raw=true) ![alt text](https://github.com/CekApel/Mockup_Application/blob/master/EditProfile.png?raw=true) ![alt text](https://github.com/CekApel/Mockup_Application/blob/master/About.png?raw=true)
