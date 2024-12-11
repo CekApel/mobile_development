@@ -28,15 +28,15 @@ class ArticleViewModel : ViewModel() {
 
                 if (response.isSuccessful) {
                     val data = response.body()?.data ?: emptyList()
-                    Log.d("ArticleViewModel", "Fetched articles: $data")
+                    Log.d("ArticleViewModel", "Artikel berhasil dimuat: $data")
                     _articles.value = data
                 } else {
-                    val errorMessage = "Failed to load articles: ${response.message()}"
+                    val errorMessage = "Gagal memuat artikel. Silakan coba lagi."
                     Log.e("ArticleViewModel", errorMessage)
                     _error.value = errorMessage
                 }
             } catch (e: Exception) {
-                val errorMessage = "Error fetching articles: ${e.message}"
+                val errorMessage = "Tidak dapat terhubung ke server. Periksa koneksi internet Anda."
                 Log.e("ArticleViewModel", errorMessage, e)
                 _error.value = errorMessage
             } finally {
@@ -44,5 +44,4 @@ class ArticleViewModel : ViewModel() {
             }
         }
     }
-
 }

@@ -87,7 +87,7 @@ class EditProfilActivity : AppCompatActivity() {
         val name = binding.editName.text.toString().trim()
 
         if (name.isEmpty()) {
-            Toast.makeText(this, "Please enter a name", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Masukkan nama", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -98,7 +98,7 @@ class EditProfilActivity : AppCompatActivity() {
             profileImageUri = profileImageUri
         )
 
-        Toast.makeText(this, "Profile updated successfully", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Ubah profil berhasil", Toast.LENGTH_SHORT).show()
         finish()
     }
 }

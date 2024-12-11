@@ -30,11 +30,11 @@ class HomeViewModel : ViewModel() {
                     _articles.value = response.body()?.data ?: emptyList()
                     _isLoading.value = false
                 } else {
-                    _error.value = "Failed to fetch articles"
+                    _error.value = "Gagal memuat artikel. Silakan coba lagi."
                     _isLoading.value = false
                 }
             } catch (e: Exception) {
-                _error.value = "Error: ${e.message}"
+                _error.value = "Tidak dapat terhubung ke server. Periksa koneksi internet Anda."
                 _isLoading.value = false
             }
         }
