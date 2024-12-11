@@ -30,6 +30,7 @@ class ScanFragment : Fragment() {
     private lateinit var binding: FragmentScanBinding
     private val scanViewModel: ScanViewModel by viewModels()
     private var currentImageUri: Uri? = null
+    private var hasShownAttentionPopup = false
 
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
@@ -68,7 +69,11 @@ class ScanFragment : Fragment() {
         binding = FragmentScanBinding.inflate(inflater, container, false)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
-        showAttentionPopup()
+        hasShownAttentionPopup = savedInstanceState?.getBoolean(STATE_ATTENTION_POPUP, false) ?: false
+
+        if (!hasShownAttentionPopup) {
+            showAttentionPopup()
+        }
 
         currentImageUri = savedInstanceState?.getParcelable(STATE_IMAGE_URI)
 
@@ -120,6 +125,7 @@ class ScanFragment : Fragment() {
         builder.setMessage("Scan daun apel ya!")
         builder.setPositiveButton("Ok") { dialog: DialogInterface, _: Int ->
             dialog.dismiss()
+            hasShownAttentionPopup = true
         }
         builder.setCancelable(false)
         builder.show()
@@ -180,10 +186,12 @@ class ScanFragment : Fragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putParcelable(STATE_IMAGE_URI, currentImageUri)
+        outState.putBoolean(STATE_ATTENTION_POPUP, hasShownAttentionPopup)
     }
 
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
         private const val STATE_IMAGE_URI = "state_image_uri"
+        private const val STATE_ATTENTION_POPUP = "state_attention_popup"
     }
 }

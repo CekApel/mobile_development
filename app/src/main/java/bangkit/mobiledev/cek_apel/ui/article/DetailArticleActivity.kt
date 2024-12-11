@@ -21,6 +21,20 @@ import java.io.FileOutputStream
 class DetailArticleActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailArticleBinding
 
+    companion object {
+        private const val KEY_ARTICLE_NAME = "KEY_ARTICLE_NAME"
+        private const val KEY_ARTICLE_DESCRIPTION = "KEY_ARTICLE_DESCRIPTION"
+        private const val KEY_ARTICLE_HANDLING = "KEY_ARTICLE_HANDLING"
+        private const val KEY_ARTICLE_IMAGE_URL = "KEY_ARTICLE_IMAGE_URL"
+        private const val KEY_IS_DATA_LOADED = "KEY_IS_DATA_LOADED"
+    }
+
+    private var articleName: String = ""
+    private var articleDescription: String = ""
+    private var articleHandling: ArrayList<String> = arrayListOf()
+    private var articleImageUrl: String = ""
+    private var isDataLoaded: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailArticleBinding.inflate(layoutInflater)
@@ -28,41 +42,64 @@ class DetailArticleActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        binding.progressBar.visibility = View.VISIBLE
-
-        binding.btnShare.visibility = View.GONE
-
-        val toolbar = binding.topAppBar
-        toolbar.setNavigationOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
+        if (savedInstanceState != null) {
+            articleName = savedInstanceState.getString(KEY_ARTICLE_NAME, "")
+            articleDescription = savedInstanceState.getString(KEY_ARTICLE_DESCRIPTION, "")
+            articleHandling = savedInstanceState.getStringArrayList(KEY_ARTICLE_HANDLING) ?: arrayListOf()
+            articleImageUrl = savedInstanceState.getString(KEY_ARTICLE_IMAGE_URL, "")
+            isDataLoaded = savedInstanceState.getBoolean(KEY_IS_DATA_LOADED, false)
+        } else {
+            articleName = intent.getStringExtra("ARTICLE_NAME") ?: ""
+            articleDescription = intent.getStringExtra("ARTICLE_DESCRIPTION") ?: ""
+            articleHandling = intent.getStringArrayListExtra("ARTICLE_HANDLING") ?: arrayListOf("Tidak ada informasi penanganan")
+            articleImageUrl = intent.getStringExtra("ARTICLE_IMAGE_URL") ?: ""
         }
 
-        val articleName = intent.getStringExtra("ARTICLE_NAME") ?: ""
-        val articleDescription = intent.getStringExtra("ARTICLE_DESCRIPTION") ?: ""
-        val articleHandling = intent.getStringArrayListExtra("ARTICLE_HANDLING") ?: arrayListOf("Tidak ada informasi penanganan")
-        val articleImageUrl = intent.getStringExtra("ARTICLE_IMAGE_URL") ?: ""
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            binding.apply {
-                tvArticleTitle.text = articleName
-                tvArticleDescription.text = articleDescription
-
-                Glide.with(this@DetailArticleActivity)
-                    .load(articleImageUrl)
-                    .into(ivArticle)
-
-                val handlingStepsText = articleHandling.joinToString("\n")
-                tvHandlingSteps.text = handlingStepsText
-
-                progressBar.visibility = View.GONE
-
-                btnShare.visibility = View.VISIBLE
-            }
-        }, 1000)
+        if (!isDataLoaded) {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.btnShare.visibility = View.GONE
+            Handler(Looper.getMainLooper()).postDelayed({
+                isDataLoaded = true
+                setupUI()
+            }, 1000)
+        } else {
+            binding.progressBar.visibility = View.GONE
+            setupUI()
+        }
 
         binding.btnShare.setOnClickListener {
             shareArticleWithImage(articleName, articleDescription, articleHandling, articleImageUrl)
         }
+
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+    }
+
+    private fun setupUI() {
+        binding.apply {
+            tvArticleTitle.text = articleName
+            tvArticleDescription.text = articleDescription
+
+            Glide.with(this@DetailArticleActivity)
+                .load(articleImageUrl)
+                .into(ivArticle)
+
+            val handlingStepsText = articleHandling.joinToString("\n")
+            tvHandlingSteps.text = handlingStepsText
+
+            progressBar.visibility = View.GONE
+            btnShare.visibility = View.VISIBLE
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(KEY_ARTICLE_NAME, articleName)
+        outState.putString(KEY_ARTICLE_DESCRIPTION, articleDescription)
+        outState.putStringArrayList(KEY_ARTICLE_HANDLING, articleHandling)
+        outState.putString(KEY_ARTICLE_IMAGE_URL, articleImageUrl)
+        outState.putBoolean(KEY_IS_DATA_LOADED, isDataLoaded)
     }
 
     private fun shareArticleWithImage(
@@ -128,8 +165,7 @@ class DetailArticleActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onLoadCleared(placeholder: Drawable?) {
-                }
+                override fun onLoadCleared(placeholder: Drawable?) {}
 
                 override fun onLoadFailed(errorDrawable: Drawable?) {
                     val textShareIntent = Intent(Intent.ACTION_SEND).apply {
